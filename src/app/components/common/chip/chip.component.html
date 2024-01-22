@@ -1,0 +1,30 @@
+@if (clickable) {
+  <button
+    type="button"
+    class="inline-flex items-center gap-x-0.5 rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset hover:bg-gray-600/20"
+    [ngClass]="[colors.background, colors.font, colors.accent]"
+    (click)="clicked.emit(title)"
+  >
+    {{ title }}
+    <span class="sr-only">Select</span>
+  </button>
+} @else {
+  <span
+    class="inline-flex items-center gap-x-0.5 rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset"
+    [ngClass]="[colors.background, colors.font, colors.accent]">
+    {{ title }}
+    @if (removable) {
+      <button
+        type="button"
+        class="group relative -mr-1 h-3.5 w-3.5 rounded-sm hover:bg-gray-600/20"
+        (click)="removed.emit(title)"
+      >
+        <span class="sr-only">Remove</span>
+        <svg viewBox="0 0 14 14" class="h-3.5 w-3.5 stroke-gray-700/50 group-hover:stroke-gray-700/75">
+          <path d="M4 4l6 6m0-6l-6 6" />
+        </svg>
+        <span class="absolute -inset-1"></span>
+      </button>
+    }
+  </span>
+}
