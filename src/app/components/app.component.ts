@@ -12,4 +12,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 })
 export class AppComponent {
   @HostBinding('class.h-full') get full() { return true; }
+  @HostBinding('class.flex') get flex() { return true; }
+  @HostBinding('class.flex-col') get flexCol() { return true; }
 }
