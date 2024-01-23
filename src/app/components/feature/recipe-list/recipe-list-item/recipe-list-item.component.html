@@ -1,10 +1,11 @@
-<tt-overlay [isVisible]="isHovering">
+<tt-overlay [visible]="isHovering" [attachTo]="rowLink" [attachAbove]="true" [paddingLeft]="24">
   <tt-recipe-preview></tt-recipe-preview>
 </tt-overlay>
 
 <div class="flex flex-row w-full gap-5">
   <span class="w-full flex flex-col gap-2 align-middle">
     <a
+      #rowLink
       [routerLink]="'/view/' + recipe.link"
       class="flex flex-row min-w-0 gap-x-4 px-2 py-2 hover:bg-gray-400/20"
       (mouseover)="isHovering = true"
@@ -23,7 +24,7 @@
     </a>
     <div class="ml-16 px-2 sm:flex sm:flex-row gap-3 sm:items-end">
       @for (tag of recipe.tags; track $index) {
-        <tt-chip [title]="tag.title" [colors]="tag.colors" [asLink]="'/list/' + tag.title"></tt-chip>
+        <tt-chip [title]="tag.title" [color]="tag.color" [asLink]="'/list/' + tag.title"></tt-chip>
       }
     </div>
   </span>

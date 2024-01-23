@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { ColorCombo } from '../../../models/tags.model';
 import { RouterModule } from '@angular/router';
+import { Color, ColorMatcher } from '../../../models/colors.model';
 
 @Component({
   selector: 'tt-chip',
@@ -13,10 +13,16 @@ import { RouterModule } from '@angular/router';
 })
 export class ChipComponent {
   @Input({ required: true }) title!: string;
-  @Input({ required: true }) colors!: ColorCombo;
+  @Input({ required: true }) set color(color: Color) {
+    this.colors.color = color;
+  }
+  get color(): Color {
+    return this.colors.color;
+  }
   @Input() removable?: boolean;
   @Input() asButton?: boolean;
   @Input() asLink?: string;
   @Output() clicked = new EventEmitter<string>();
   @Output() removed = new EventEmitter<string>();
+  colors = new ColorMatcher();
 }

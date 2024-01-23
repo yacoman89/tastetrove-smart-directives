@@ -2,7 +2,23 @@
   <button
     type="button"
     class="inline-flex items-center gap-x-0.5 rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset hover:bg-gray-600/20"
-    [ngClass]="[colors.background, colors.font, colors.accent]"
+    [ngClass]="{
+      'bg-red-100 text-red-700 ring-red-600/10': colors.isRed1,
+      'bg-pink-100 text-pink-700 ring-pink-700/10': colors.isRed2,
+      'orange-1': colors.isOrange1,
+      'orange-2': colors.isOrange2,
+      'yellow-1': colors.isYellow1,
+      'bg-yellow-100 text-yellow-800 ring-yellow-600/20': colors.isYellow2,
+      'bg-green-100 text-green-700 ring-green-600/20': colors.isGreen1,
+      'green-2': colors.isGreen2,
+      'aqua-1': colors.isAqua1,
+      'aqua-2': colors.isAqua2,
+      'bg-blue-100 text-blue-700 ring-blue-700/10': colors.isBlue1,
+      'blue-2': colors.isBlue2,
+      'bg-indigo-100 text-indigo-700 ring-indigo-700/10': colors.isIndigo1,
+      'indigo-2': colors.isIndigo2,
+      'purple-1': colors.isPurple1,
+      'purple-2': colors.isPurple2 }"
     (click)="clicked.emit(title)"
   >
     {{ title }}
@@ -12,7 +28,24 @@
   <a
     type="button"
     class="inline-flex items-center gap-x-0.5 rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset hover:bg-gray-600/20"
-    [ngClass]="[colors.background, colors.font, colors.accent]"
+    [ngClass]="{
+      'bg-red-100 text-red-700 ring-red-600/10': colors.isRed1,
+      'bg-pink-100 text-pink-700 ring-pink-700/10': colors.isRed2,
+      'orange-1': colors.isOrange1,
+      'orange-2': colors.isOrange2,
+      'yellow-1': colors.isYellow1,
+      'bg-yellow-100 text-yellow-800 ring-yellow-600/20': colors.isYellow2,
+      'bg-green-100 text-green-700 ring-green-600/20': colors.isGreen1,
+      'green-2': colors.isGreen2,
+      'aqua-1': colors.isAqua1,
+      'aqua-2': colors.isAqua2,
+      'bg-blue-100 text-blue-700 ring-blue-700/10': colors.isBlue1,
+      'blue-2': colors.isBlue2,
+      'bg-indigo-100 text-indigo-700 ring-indigo-700/10': colors.isIndigo1,
+      'indigo-2': colors.isIndigo2,
+      'purple-1': colors.isPurple1,
+      'purple-2': colors.isPurple2 }"
+
     [routerLink]="asLink"
   >
     {{ title }}
@@ -21,7 +54,24 @@
 } @else {
   <span
     class="inline-flex items-center gap-x-0.5 rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset"
-    [ngClass]="[colors.background, colors.font, colors.accent]">
+    [ngClass]="{
+      'bg-red-100 text-red-700 ring-red-600/10': colors.isRed1,
+      'bg-pink-100 text-pink-700 ring-pink-700/10': colors.isRed2,
+      'orange-1': colors.isOrange1,
+      'orange-2': colors.isOrange2,
+      'yellow-1': colors.isYellow1,
+      'bg-yellow-100 text-yellow-800 ring-yellow-600/20': colors.isYellow2,
+      'bg-green-100 text-green-700 ring-green-600/20': colors.isGreen1,
+      'green-2': colors.isGreen2,
+      'aqua-1': colors.isAqua1,
+      'aqua-2': colors.isAqua2,
+      'bg-blue-100 text-blue-700 ring-blue-700/10': colors.isBlue1,
+      'blue-2': colors.isBlue2,
+      'bg-indigo-100 text-indigo-700 ring-indigo-700/10': colors.isIndigo1,
+      'indigo-2': colors.isIndigo2,
+      'purple-1': colors.isPurple1,
+      'purple-2': colors.isPurple2 }"
+  >
     {{ title }}
     @if (removable) {
       <button

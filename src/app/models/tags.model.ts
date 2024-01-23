@@ -1,10 +1,6 @@
-export interface ColorCombo {
-  background: string;
-  font: string;
-  accent: string;
-}
+import { Color } from './colors.model';
 
 export interface Tag {
   title: string;
-  colors: ColorCombo;
+  color: Color;
 }
