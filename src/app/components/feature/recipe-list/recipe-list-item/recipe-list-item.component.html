@@ -1,0 +1,30 @@
+<tt-overlay [isVisible]="isHovering">
+  <tt-recipe-preview></tt-recipe-preview>
+</tt-overlay>
+
+<div class="flex flex-row w-full gap-5">
+  <span class="w-full flex flex-col gap-2 align-middle">
+    <a
+      [routerLink]="'/view/' + recipe.link"
+      class="flex flex-row min-w-0 gap-x-4 px-2 py-2 hover:bg-gray-400/20"
+      (mouseover)="isHovering = true"
+      (mouseout)="isHovering = false"
+    >
+      <img class="h-12 w-12 flex-none rounded-full bg-gray-50" [src]="recipe.thumbnailUrl" alt="recipe thumbnail">
+      <span class="w-full grid grid-cols-4 align-middle">
+        <p class="self-center text-sm font-semibold leading-6 text-gray-900">{{ recipe.name }}</p>
+        <tt-rating class="self-center" [value]="recipe.rating"></tt-rating>
+        <span class="self-center">
+          <fa-icon [icon]="clockIcon"></fa-icon>
+          {{ recipe.duration }}
+        </span>
+        <tt-difficulty class="self-center" [value]="recipe.difficulty"></tt-difficulty>
+      </span>
+    </a>
+    <div class="ml-16 px-2 sm:flex sm:flex-row gap-3 sm:items-end">
+      @for (tag of recipe.tags; track $index) {
+        <tt-chip [title]="tag.title" [colors]="tag.colors" [asLink]="'/list/' + tag.title"></tt-chip>
+      }
+    </div>
+  </span>
+</div>

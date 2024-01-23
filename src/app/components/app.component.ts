@@ -1,7 +1,7 @@
 import { Component, HostBinding } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './feature/navbar/navbar.component';
 
 @Component({
   selector: 'tt-root',

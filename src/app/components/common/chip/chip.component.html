@@ -1,4 +1,4 @@
-@if (clickable) {
+@if (asButton) {
   <button
     type="button"
     class="inline-flex items-center gap-x-0.5 rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset hover:bg-gray-600/20"
@@ -8,6 +8,16 @@
     {{ title }}
     <span class="sr-only">Select</span>
   </button>
+} @else if (asLink) {
+  <a
+    type="button"
+    class="inline-flex items-center gap-x-0.5 rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset hover:bg-gray-600/20"
+    [ngClass]="[colors.background, colors.font, colors.accent]"
+    [routerLink]="asLink"
+  >
+    {{ title }}
+    <span class="sr-only">Select</span>
+  </a>
 } @else {
   <span
     class="inline-flex items-center gap-x-0.5 rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset"

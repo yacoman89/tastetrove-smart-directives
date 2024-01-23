@@ -1,0 +1,16 @@
+<ul role="list" class="divide-y divide-gray-100">
+  @if (loading) {
+    @for (row of ghostLoadingRows; track $index) {
+      <tt-loading-list-item></tt-loading-list-item>
+    }
+  } @else {
+    @if (error) {
+      <tt-error-list-item [error]="error"></tt-error-list-item>
+    }
+    @for (recipe of recipes; track $index) {
+      <li class="flex justify-between gap-x-6 py-5">
+        <tt-recipe-list-item [recipe]="recipe" [excludeTags]="excludeTags"></tt-recipe-list-item>
+      </li>
+    }
+  }
+</ul>
