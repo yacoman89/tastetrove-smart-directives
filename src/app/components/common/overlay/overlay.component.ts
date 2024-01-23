@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, Injector, Input, afterNextRender, inject } from '@angular/core';
 import { WINDOW, WindowProvider } from '../../../providers';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'tt-overlay',
@@ -7,6 +8,7 @@ import { WINDOW, WindowProvider } from '../../../providers';
   styleUrl: './overlay.component.scss',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule],
   providers: [WindowProvider]
 })
 export class OverlayComponent {
@@ -39,6 +41,10 @@ export class OverlayComponent {
 
   private get overlayHeight(): number {
     return this.overlayRects?.height || 0;
+  }
+
+  private get overlayWidth(): number {
+    return this.overlayRects?.width || 0;
   }
 
   private get overlayLeft(): number {
@@ -82,5 +88,9 @@ export class OverlayComponent {
     if (this.paddingLeft) {
       this.overlayElement.style.left = `${this.overlayLeft + this.paddingLeft}px`;
     }
+  }
+
+  get translateArrowStyle(): string {
+    return `translate(${this.overlayWidth / 2 - 4.5}px, 0px)`;
   }
 }

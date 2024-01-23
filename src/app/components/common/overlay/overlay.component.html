@@ -2,11 +2,15 @@
   <div
     data-popover
     [attr.data-popper-placement]="shouldAttachAbove ? 'top' : 'bottom'"
-    class="absolute z-10 inline-block w-64 rounded-lg shadow-sm bg-white border border-gray-300"
+    class="absolute z-10 inline-block rounded-lg shadow-sm bg-white border border-gray-300"
   >
     <ng-content></ng-content>
     @if (includeArrow) {
-      <div data-popper-arrow style="position: absolute; left: 0px; transform: translate(123px, 0px);"></div>
+      <div
+        data-popper-arrow
+        style="position: absolute; left: 0px; transform: translate(123px, 0px);"
+        [ngStyle]="{ 'transform': translateArrowStyle }"
+      ></div>
     }
   </div>
 }
