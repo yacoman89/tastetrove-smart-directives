@@ -8,10 +8,9 @@ export interface RecipePreview {
   difficulty: Difficulty;
   rating: Rating;
   duration: string;
-  thumbnailUrl?: string;
   imageUrl?: string;
-  link: string;
   tags?: Tag[];
+  recipeLink: string;
 }
 
 export interface RecipeIngredient {
@@ -22,11 +21,16 @@ export interface RecipeIngredient {
 export interface RecipeStep {
   number: number;
   intructions: string;
-  notes: string;
+}
+
+export interface Comment {
+  user: string;
+  date: string;
+  comment: string;
 }
 
 export interface Recipe extends RecipePreview {
-  story: string;
   ingredients: RecipeIngredient[];
   steps: RecipeStep[];
+  comentsLink: string;
 }

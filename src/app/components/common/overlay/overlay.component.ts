@@ -56,11 +56,11 @@ export class OverlayComponent {
   }
 
   private get attachmentTop(): number {
-    return this.attachmentRect.top;
+    return this.attachmentRect.top + this.window.scrollY;
   }
 
   private get attachmentBottom(): number {
-    return this.attachmentRect.bottom;
+    return this.attachmentTop + this.attachmentRect.height;
   }
 
   private get arrowHeight(): number {

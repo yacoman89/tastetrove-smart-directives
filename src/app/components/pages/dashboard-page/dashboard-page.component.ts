@@ -31,41 +31,37 @@ export class DashboardPageComponent {
     {
       name: 'Rice',
       difficulty: Difficulty.EASY,
-      link: 'rice',
+      recipeLink: 'rice',
       duration: '30 mins',
       rating: 3,
-      imageUrl: 'assets/rice.jpg',
-      thumbnailUrl: 'assets/rice.jpg'
+      imageUrl: 'assets/rice.jpg'
     },
     {
       name: 'Fried eggs',
       difficulty: Difficulty.INTERMEDIATE,
-      link: 'fried-eggs',
+      recipeLink: 'fried-eggs',
       duration: '5 mins',
       rating: 4,
       tags: [breakfastTag],
-      imageUrl: 'assets/fried-eggs.jpg',
-      thumbnailUrl: 'assets/fried-eggs.jpg'
+      imageUrl: 'assets/fried-eggs.jpg'
     },
     {
       name: 'Roasted Brussle Sprouts',
       difficulty: Difficulty.INTERMEDIATE,
-      link: 'brussel-sprouts',
+      recipeLink: 'brussel-sprouts',
       duration: '45 mins',
       rating: 2,
       tags: [veggiesTag, dinnerTag],
-      imageUrl: 'assets/brussel-sprouts.jpg',
-      thumbnailUrl: 'assets/brussel-sprouts.jpg'
+      imageUrl: 'assets/brussel-sprouts.jpg'
     },
     {
       name: 'Apple Pie',
       difficulty: Difficulty.HARD,
-      link: 'apple-pie',
+      recipeLink: 'apple-pie',
       duration: '1 Hr 45 mins',
       rating: 5,
       tags: [desertTag, dinnerTag, breakfastTag, multiStepTag, bakedTag],
-      imageUrl: 'assets/apple-pie.jpg',
-      thumbnailUrl: 'assets/apple-pie.jpg'
+      imageUrl: 'assets/apple-pie.jpg'
     }
   ];
 }
