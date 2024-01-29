@@ -1,2 +1,19 @@
-<h2 class="mb-3 text-xl font-semibold">Recipe View Page</h2>
-Recipe details go here
+<div class="w-full h-fit p-5 flex flex-col gap-10 items-center justify-center">
+  <tt-card class="w-[60rem]">
+    <tt-recipe-header [recipePreview]="preview" [loading]="loading()"></tt-recipe-header>
+  </tt-card>
+
+  <div class="w-[60rem]">
+    <h2 class="mb-3 text-xl font-semibold">Ingredients</h2>
+    <tt-card>
+      <tt-recipe-ingredients [ingredients]="ingredients" [loading]="loading()"></tt-recipe-ingredients>
+    </tt-card>
+  </div>
+
+  <div class="w-[60rem]">
+    <h2 class="mb-3 text-xl font-semibold">Instructions</h2>
+    <tt-card>
+      <tt-recipe-instructions [instructions]="instructions" [loading]="loading()"></tt-recipe-instructions>
+    </tt-card>
+  </div>
+</div>
