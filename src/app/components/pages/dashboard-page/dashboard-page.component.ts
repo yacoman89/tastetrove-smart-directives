@@ -46,13 +46,13 @@ export class DashboardPageComponent {
       imageUrl: 'assets/fried-eggs.jpg'
     },
     {
-      name: 'Roasted Brussle Sprouts',
+      name: 'Roasted Brussels Sprouts',
       difficulty: Difficulty.INTERMEDIATE,
-      recipeLink: 'brussel-sprouts',
+      recipeLink: 'brussels-sprouts',
       duration: '45 mins',
       rating: 2,
       tags: [veggiesTag, dinnerTag],
-      imageUrl: 'assets/brussel-sprouts.jpg'
+      imageUrl: 'assets/brussels-sprouts.jpg'
     },
     {
       name: 'Apple Pie',

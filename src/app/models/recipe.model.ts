@@ -18,9 +18,9 @@ export interface RecipeIngredient {
   quantity: string;
 }
 
-export interface RecipeStep {
+export interface RecipeInstruction {
   number: number;
-  intructions: string;
+  instructions: string;
 }
 
 export interface Comment {
@@ -31,6 +31,6 @@ export interface Comment {
 
 export interface Recipe extends RecipePreview {
   ingredients: RecipeIngredient[];
-  steps: RecipeStep[];
-  comentsLink: string;
+  instructions: RecipeInstruction[];
+  commentsLink: string;
 }

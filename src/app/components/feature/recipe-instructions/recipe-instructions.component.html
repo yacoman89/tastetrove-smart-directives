@@ -1,0 +1,41 @@
+<span class="w-full h-fit flex flex-col p-5 gap-10">
+  @if (loading || error) {
+    <div role="status" class="space-y-5 animate-pulse">
+      <span class="flex gap-4 items-center">
+        <span class="h-4 w-4 rounded bg-gray-200"></span>
+        <span class="h-4 w-[24rem] bg-gray-200"></span>
+      </span>
+      <span class="flex gap-4 items-center">
+        <span class="h-4 w-4 rounded bg-gray-200"></span>
+        <span class="h-4 w-[42rem] bg-gray-200"></span>
+      </span>
+      <span class="flex gap-4 items-center">
+        <span class="h-4 w-4 rounded bg-gray-200"></span>
+        <span class="h-4 w-[40rem] bg-gray-200"></span>
+      </span>
+      <span class="flex gap-4 items-center">
+        <span class="h-4 w-4 rounded bg-gray-200"></span>
+        <span class="h-4 w-[32rem] bg-gray-200"></span>
+      </span>
+      <span class="flex gap-4 items-center">
+        <span class="h-4 w-4 rounded bg-gray-200"></span>
+        <span class="h-4 w-[28rem] bg-gray-200"></span>
+      </span>
+      <span class="flex gap-4 items-center">
+        <span class="h-4 w-4 rounded bg-gray-200"></span>
+        <span class="h-4 w-[36rem] bg-gray-200"></span>
+      </span>
+    </div>
+  } @else if (instructions) {
+    <ol role="list" class="space-y-3 text-gray-600">
+      @for (instruction of instructions; track $index) {
+        <li class="flex gap-3 items-center text-sm text-gray-900">
+          <span class="w-5">{{ instruction.number}}.</span>
+          <p>{{ instruction.instructions }}</p>
+        </li>
+      }
+    </ol>
+  } @else {
+    No instructions available
+  }
+</span>
