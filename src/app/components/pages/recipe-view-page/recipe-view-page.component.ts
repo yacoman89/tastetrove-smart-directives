@@ -4,9 +4,10 @@ import { RecipeHeaderComponent } from '../../feature/recipe-header/recipe-header
 import { RecipeInstructionsComponent } from '../../feature/recipe-instructions/recipe-instructions.component';
 import { RecipeIngredientsComponent } from '../../feature/recipe-ingredients/recipe-ingredients.component';
 import { CardComponent } from '../../common/card/card.component';
-import { Difficulty, RecipeIngredient, RecipeInstruction, RecipePreview } from '../../../models/recipe.model';
+import { Difficulty, RecipeIngredient, RecipeInstruction, RecipePreview, Comment } from '../../../models/recipe.model';
 import { Tag } from '../../../models/tags.model';
 import { Color } from '../../../models/colors.model';
+import { CommentsComponent } from '../../feature/comments/comments.component';
 
 const veggiesTag: Tag = { title: 'Veggies', color: Color.GREEN_1 };
 const dinnerTag: Tag = { title: 'Dinner', color: Color.INDIGO_1 };
@@ -17,9 +18,10 @@ const dinnerTag: Tag = { title: 'Dinner', color: Color.INDIGO_1 };
   styleUrl: './recipe-view-page.component.scss',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, CardComponent, RecipeHeaderComponent, RecipeIngredientsComponent, RecipeInstructionsComponent]
+  imports: [CommonModule, CardComponent, RecipeHeaderComponent, RecipeIngredientsComponent, RecipeInstructionsComponent, CommentsComponent]
 })
 export class RecipeViewPageComponent implements OnInit {
+  readonly user = 'Test user';
   readonly preview: RecipePreview = {
     name: 'Roasted Brussels Sprouts',
     difficulty: Difficulty.INTERMEDIATE,
@@ -49,6 +51,12 @@ export class RecipeViewPageComponent implements OnInit {
     { number: 8, instructions: 'Put baking sheet back in the oven for 20 more minutes.' },
     { number: 10, instructions: 'Take baking sheet out and let cool for 5 minutes.' },
     { number: 11, instructions: 'Take baking sheet out and let cool for 5 minutes.' },
+  ];
+  readonly comments: Comment[] = [
+    { user: 'Mike', date: (new Date()).toISOString(), comment: 'this was way to hard for me' },
+    // { user: 'Mary', date: (new Date()).toISOString(), comment: 'this was way to hard for me' },
+    // { user: 'Linda', date: (new Date()).toISOString(), comment: 'this was way to hard for me' },
+    // { user: 'Steve', date: (new Date()).toISOString(), comment: 'this was way to hard for me' },
   ];
 
   readonly loading = signal(true);
