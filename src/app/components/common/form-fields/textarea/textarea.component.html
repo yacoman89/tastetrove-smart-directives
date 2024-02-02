@@ -1,0 +1,30 @@
+<div id="tabs-1-panel-1" class="-m-0.5 rounded-lg p-0.5" aria-labelledby="tabs-1-tab-1" role="tabpanel" tabindex="0">
+  @if (hideLabel) {
+    <label for="textarea" class="sr-only">{{ label }}</label>
+  } @else {
+    <label for="textarea">{{ label }}</label>
+  }
+  <div>
+    @if (maxLength && showLength) {
+      <div class="flex justify-end mt-[-1.5rem]">({{ length() }}/{{ maxLength }})</div>
+    }
+    <textarea
+      name="textarea"
+      id="textarea"
+      class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+      [rows]="rows"
+      [attr.placeholder]="placeholder"
+      [formControl]="control"
+      (keydown.enter)="$event.preventDefault()"
+    ></textarea>
+    @if (control.touched && control.errors?.['required']) {
+      <p class="text-red-600">Value is required</p>
+    }
+    @if (control.touched && control.errors?.['minlength']) {
+      <p class="text-red-600">Min length of {{ control.errors?.['minlength']['requiredLength'] }}</p>
+    }
+    @if (control.touched && control.errors?.['maxlength']) {
+      <p class="text-red-600">Max length of {{ control.errors?.['maxlength']['requiredLength'] }}</p>
+    }
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="flex flex-col gap-5">
+  <span class="flex gap-5">
+    <fa-icon [icon]="personIcon" class="text-3xl self-center"></fa-icon>
+    <span>
+      <p class="font-semibold">{{ comment.user }}</p>
+      <p>{{ comment.date | date:'medium' }}</p>
+    </span>
+  </span>
+  <p class="text-gray-700"><em>{{ comment.comment }}</em></p>
+</div>

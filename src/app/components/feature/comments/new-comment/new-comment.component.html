@@ -1,0 +1,19 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()" (keydown.control.enter)="onSubmit()">
+  <div class="mt-2">
+    <tt-textarea
+      [rows]="MIN_COMMENT_ROWS"
+      [label]="'New Comment (' + this.user + ')'"
+      placeholder="Add your awesome comment here"
+      [control]="commentControl"
+      [maxLength]="MAX_COMMENT_LENGTH"
+      [showLength]="true"
+    />
+  </div>
+  <div class="mt-2 flex justify-end">
+    <button
+      [disabled]="invalid$ | async"
+      type="submit"
+      class="disabled:cursor-not-allowed disabled:bg-indigo-400 inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+    >Post</button>
+  </div>
+</form>
