@@ -1,0 +1,482 @@
+{
+  "recipes": [
+    {
+      "id": 0,
+      "name": "Rice",
+      "difficulty": "easy",
+      "duration": "30 mins",
+      "rating": 3,
+      "imageUrl": "http://localhost:4200/assets/rice.jpg"
+    },
+    {
+      "id": 1,
+      "name": "Fried eggs",
+      "difficulty": "intermediate",
+      "duration": "5 mins",
+      "rating": 4,
+      "imageUrl": "http://localhost:4200/assets/fried-eggs.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Roasted Brussels Sprouts",
+      "difficulty": "intermediate",
+      "duration": "45 mins",
+      "rating": 2,
+      "imageUrl": "http://localhost:4200/assets/brussels-sprouts.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Apple Pie",
+      "difficulty": "hard",
+      "duration": "1 hr 45 mins",
+      "rating": 5,
+      "imageUrl": "http://localhost:4200/assets/apple-pie.jpg"
+    }
+  ],
+  "recipeTags": [
+    { "id": 0, "recipeId": 1, "tagId": 0 },
+    { "id": 1, "recipeId": 2, "tagId": 1 },
+    { "id": 2, "recipeId": 2, "tagId": 2 },
+    { "id": 3, "recipeId": 3, "tagId": 3 },
+    { "id": 4, "recipeId": 3, "tagId": 2 },
+    { "id": 5, "recipeId": 3, "tagId": 0 },
+    { "id": 6, "recipeId": 3, "tagId": 5 },
+    { "id": 7, "recipeId": 3, "tagId": 4 }
+  ],
+  "recipeIngredients": [
+    { "id": 0, "recipeId": 0, "name": "Jasmine Rice", "quantity": "1/4 cup" },
+    { "id": 1, "recipeId": 0, "name": "Water", "quantity": "1/2 cup" },
+    { "id": 2, "recipeId": 0, "name": "Salt", "quantity": "1 tsp" },
+    { "id": 3, "recipeId": 1, "name": "Eggs", "quantity": "3 large eggs" },
+    { "id": 4, "recipeId": 1, "name": "Butter", "quantity": "1 tbsp" },
+    {
+      "id": 5,
+      "recipeId": 1,
+      "name": "Salt",
+      "quantity": "about 1/4 tsp to taste"
+    },
+    {
+      "id": 6,
+      "recipeId": 1,
+      "name": "Pepper",
+      "quantity": "about 1/4 tsp to taste"
+    },
+    {
+      "id": 7,
+      "recipeId": 2,
+      "name": "Fresh Brussels Sprouts",
+      "quantity": "3 lbs"
+    },
+    { "id": 8, "recipeId": 2, "name": "Thick Cut Bacon", "quantity": "1 lb" },
+    { "id": 9, "recipeId": 2, "name": "Olive Oil", "quantity": "3 tbsp" },
+    {
+      "id": 10,
+      "recipeId": 2,
+      "name": "Salt",
+      "quantity": "about 1 tsp to taste"
+    },
+    {
+      "id": 11,
+      "recipeId": 2,
+      "name": "Pepper",
+      "quantity": "about 1 tsp to taste"
+    },
+    {
+      "id": 12,
+      "recipeId": 2,
+      "name": "Balsamic Glaze",
+      "quantity": "about 1 tsp for serving"
+    },
+    {
+      "id": 13,
+      "recipeId": 2,
+      "name": "Parmesan Cheese",
+      "quantity": "about 1/4 cup for serving"
+    },
+    { "id": 14, "recipeId": 3, "name": "White Flour", "quantity": "3 cups" },
+    { "id": 15, "recipeId": 3, "name": "Sugar", "quantity": "2 1/4 cup" },
+    { "id": 16, "recipeId": 3, "name": "Salt", "quantity": "1/2 tbsp" },
+    {
+      "id": 17,
+      "recipeId": 3,
+      "name": "Butter",
+      "quantity": "1 cup frozen 1/2 cup soft"
+    },
+    {
+      "id": 18,
+      "recipeId": 3,
+      "name": "Fireball",
+      "quantity": "about 1/4 cup very cold"
+    },
+    {
+      "id": 19,
+      "recipeId": 3,
+      "name": "Water",
+      "quantity": "about 1/4 cup very cold"
+    },
+    {
+      "id": 20,
+      "recipeId": 3,
+      "name": "Granny Smith Apples",
+      "quantity": "3 apples"
+    },
+    {
+      "id": 21,
+      "recipeId": 3,
+      "name": "Honeycrisp Apples",
+      "quantity": "3 apples"
+    },
+    {
+      "id": 22,
+      "recipeId": 3,
+      "name": "Golden Delicious Apples",
+      "quantity": "3 apples"
+    },
+    { "id": 23, "recipeId": 3, "name": "Apple Jelly", "quantity": "1 tbsp" },
+    { "id": 24, "recipeId": 3, "name": "Egg", "quantity": "1 egg" }
+  ],
+  "recipeInstructions": [
+    {
+      "id": 0,
+      "recipeId": 0,
+      "number": 1,
+      "instructions": "Add water and salt to medium pot and set on high heat."
+    },
+    {
+      "id": 1,
+      "recipeId": 0,
+      "number": 2,
+      "instructions": "Wash rice in water until the water is clear."
+    },
+    {
+      "id": 2,
+      "recipeId": 0,
+      "number": 3,
+      "instructions": "Once water in the pot is boiling, add washed rice to water."
+    },
+    {
+      "id": 3,
+      "recipeId": 0,
+      "number": 4,
+      "instructions": "After water is boiling again, set heat to medium and cover for 15 mins."
+    },
+    {
+      "id": 4,
+      "recipeId": 0,
+      "number": 5,
+      "instructions": "Take off heat and fluff with a fork."
+    },
+    {
+      "id": 5,
+      "recipeId": 1,
+      "number": 1,
+      "instructions": "Add butter to pan and set on medium high heat."
+    },
+    {
+      "id": 6,
+      "recipeId": 1,
+      "number": 2,
+      "instructions": "Once butter is all melted, coat pan and crack eggs in pan."
+    },
+    {
+      "id": 7,
+      "recipeId": 1,
+      "number": 3,
+      "instructions": "Let eggs fry in pan for about 2 mins or until edges of eggs become crispy."
+    },
+    {
+      "id": 8,
+      "recipeId": 1,
+      "number": 4,
+      "instructions": "Season with salt and pepper to taste."
+    },
+    {
+      "id": 9,
+      "recipeId": 1,
+      "number": 5,
+      "instructions": "Flip eggs and let cook for another 45 seconds before serving."
+    },
+    {
+      "id": 10,
+      "recipeId": 2,
+      "number": 1,
+      "instructions": "Preheat oven to 400F."
+    },
+    {
+      "id": 11,
+      "recipeId": 2,
+      "number": 2,
+      "instructions": "Wash and cut all Brussels sprouts in half then spread out on a baking sheet."
+    },
+    {
+      "id": 12,
+      "recipeId": 2,
+      "number": 3,
+      "instructions": "Cut bacon into small chunks, about 1/2\" x 1/2\", and distribute all around brussels sprouts on the baking sheet."
+    },
+    {
+      "id": 13,
+      "recipeId": 2,
+      "number": 4,
+      "instructions": "Spread olive oil, salt, and pepper on top of everything."
+    },
+    {
+      "id": 14,
+      "recipeId": 2,
+      "number": 5,
+      "instructions": "Mix all items in the baking sheet around to coat everything and evenly spread out."
+    },
+    {
+      "id": 15,
+      "recipeId": 2,
+      "number": 6,
+      "instructions": "Put baking sheet in the oven for 25 minutes."
+    },
+    {
+      "id": 16,
+      "recipeId": 2,
+      "number": 7,
+      "instructions": "After 25 minutes, take out baking sheet and mix everything up and spread back out on baking sheet."
+    },
+    {
+      "id": 17,
+      "recipeId": 2,
+      "number": 8,
+      "instructions": "Put baking sheet back in the oven for 20 more minutes."
+    },
+    {
+      "id": 18,
+      "recipeId": 2,
+      "number": 9,
+      "instructions": "Take baking sheet out and let cool for 5 minutes."
+    },
+    {
+      "id": 19,
+      "recipeId": 3,
+      "number": 1,
+      "instructions": "Mix 2 1/2 cup flour, 1/4 cup sugar, and 1/2 tbsp salt in a bowl."
+    },
+    {
+      "id": 20,
+      "recipeId": 3,
+      "number": 2,
+      "instructions": "Cut frozen butter into 1/4\" slices and mix into bowl with flour, sugar, and salt."
+    },
+    {
+      "id": 21,
+      "recipeId": 3,
+      "number": 3,
+      "instructions": "Using a pastry blender, cut and mix in butter until you have small 1/4\" to 1/8\" chunks of butter mixed in."
+    },
+    {
+      "id": 22,
+      "recipeId": 3,
+      "number": 4,
+      "instructions": "Pour in a little cold Fireball and mix with a spatula."
+    },
+    {
+      "id": 23,
+      "recipeId": 3,
+      "number": 5,
+      "instructions": "Pour in a little cold water and mix with a spatula."
+    },
+    {
+      "id": 24,
+      "recipeId": 3,
+      "number": 6,
+      "instructions": "Keep pouring in a little Fireball and water and mix until dough looks like slightly larger DippingDots."
+    },
+    {
+      "id": 25,
+      "recipeId": 3,
+      "number": 7,
+      "instructions": "Mix dough by hand until it all sticks together. It should become very shaggy and seem like it's not going to stick together."
+    },
+    {
+      "id": 26,
+      "recipeId": 3,
+      "number": 8,
+      "instructions": "Cut dough in half and flatten into 2 disks about 3/4\" thick, wrap in cling wrap, and store in fridge over night."
+    },
+    {
+      "id": 27,
+      "recipeId": 3,
+      "number": 9,
+      "instructions": "Peel and cut all apples into 1/2\" thick slices."
+    },
+    {
+      "id": 28,
+      "recipeId": 3,
+      "number": 10,
+      "instructions": "Coat apples with 1/2 cup of sugar and let apples drain in a colander into a bowl for at least an hour."
+    },
+    {
+      "id": 29,
+      "recipeId": 3,
+      "number": 11,
+      "instructions": "Preheat oven to 350 degrees F."
+    },
+    {
+      "id": 30,
+      "recipeId": 3,
+      "number": 12,
+      "instructions": "Take 1 pie crust dough disk out of the fridge and roll out until it can completely drape into a 9\" pie pan and hand over the edges a bit."
+    },
+    {
+      "id": 31,
+      "recipeId": 3,
+      "number": 13,
+      "instructions": "Add pie crust weights on top of dough in pan and let bake for about 10 mins."
+    },
+    {
+      "id": 32,
+      "recipeId": 3,
+      "number": 14,
+      "instructions": "Let crust cool and then trim off edges."
+    },
+    {
+      "id": 33,
+      "recipeId": 3,
+      "number": 15,
+      "instructions": "Take apples out of colander and put in a large bowl."
+    },
+    {
+      "id": 34,
+      "recipeId": 3,
+      "number": 16,
+      "instructions": "Reduce apple juice from apple slices in pan for about 10 mins until it gets thick."
+    },
+    {
+      "id": 35,
+      "recipeId": 3,
+      "number": 17,
+      "instructions": "Mix reduced apple juice, apple jelly, remaining sugar, remaining flour, and soft butter together."
+    },
+    {
+      "id": 36,
+      "recipeId": 3,
+      "number": 18,
+      "instructions": "Pour apple mixture into pre-baked crust."
+    },
+    {
+      "id": 37,
+      "recipeId": 3,
+      "number": 19,
+      "instructions": "Preheat oven to 400 degrees F."
+    },
+    {
+      "id": 38,
+      "recipeId": 3,
+      "number": 20,
+      "instructions": "Take the other pie crust dough disk out of the fridge and roll out until it is about 1/8\" thick. It should be a little bigger than the other pie crust you rolled out."
+    },
+    {
+      "id": 39,
+      "recipeId": 3,
+      "number": 21,
+      "instructions": "Cut into 3/4\" strips and weave into a basket weave pattern on top of the apples in the pan."
+    },
+    {
+      "id": 40,
+      "recipeId": 3,
+      "number": 22,
+      "instructions": "Cut crust strips so about 1/2\" hangs off the edge of the pie pan. Tuck hanging strip under the bottom crust edge."
+    },
+    {
+      "id": 41,
+      "recipeId": 3,
+      "number": 23,
+      "instructions": "Crack egg into a cup and mix up. Brush egg onto woven pie crust and sprinkle with sugar."
+    },
+    {
+      "id": 42,
+      "recipeId": 3,
+      "number": 24,
+      "instructions": "Place pie on the bottom rack for 30 mins."
+    },
+    {
+      "id": 43,
+      "recipeId": 3,
+      "number": 25,
+      "instructions": "Cover pie with tin foil. Reduce oven heat to 360 degrees F."
+    },
+    {
+      "id": 44,
+      "recipeId": 3,
+      "number": 26,
+      "instructions": "Let pie bake for about 20 more minutes or until filling is bubbling."
+    },
+    {
+      "id": 45,
+      "recipeId": 3,
+      "number": 27,
+      "instructions": "Take pie out of the oven and let is cool completely. This usually takes about 4 hours."
+    }
+  ],
+  "recipeComments": [
+    {
+      "id": 0,
+      "recipeId": 0,
+      "userId": 0,
+      "date": "2024-01-03T01:26:11.415Z",
+      "comment": "This was way too easy"
+    },
+    {
+      "id": 1,
+      "recipeId": 0,
+      "userId": 1,
+      "date": "2024-01-05T06:32:03.415Z",
+      "comment": "Wish I had tried a different recipe. This one was sooooo bland and my family didn't like it very much. Maybe it would taste better if I ate it with something else."
+    },
+    {
+      "id": 2,
+      "recipeId": 2,
+      "userId": 2,
+      "date": "2024-01-02T20:15:03.415Z",
+      "comment": "I've tried to make brussels sprouts so many different ways and this was by far the best"
+    },
+    {
+      "id": 3,
+      "recipeId": 2,
+      "userId": 0,
+      "date": "2024-01-13T14:10:46.415Z",
+      "comment": "This recipe has completely changed my mind on what brussels sprouts can be"
+    },
+    {
+      "id": 4,
+      "recipeId": 2,
+      "userId": 3,
+      "date": "2024-02-01T02:49:28.415Z",
+      "comment": "Still doesn't make them good"
+    },
+    {
+      "id": 5,
+      "recipeId": 2,
+      "userId": 4,
+      "date": "2024-02-02T08:27:18.415Z",
+      "comment": "Not a bad way to make these"
+    },
+    {
+      "id": 6,
+      "recipeId": 3,
+      "userId": 4,
+      "date": "2024-01-28T11:01:44.415Z",
+      "comment": "Took longer than I expected, but this crust is worth it!"
+    }
+  ],
+  "tags": [
+    { "id": 0, "title": "Breakfast", "color": "yellow-2" },
+    { "id": 1, "title": "Veggies", "color": "green-1" },
+    { "id": 2, "title": "Dinner", "color": "indigo-1" },
+    { "id": 3, "title": "Desert", "color": "red-1" },
+    { "id": 4, "title": "Baked", "color": "red-2" },
+    { "id": 5, "title": "Multi-step", "color": "blue-1" }
+  ],
+  "users": [
+    { "id": 0, "name": "Mike" },
+    { "id": 1, "name": "Linda" },
+    { "id": 2, "name": "mrcookcook" },
+    { "id": 3, "name": "New food New me" },
+    { "id": 4, "name": "bakingqueen" }
+  ]
+}

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { RecipeLoadError } from '../../../../models/errors.model';
+import { ApiLoadError } from '../../../../models/errors.model';
 
 @Component({
   selector: 'tt-error-list-item',
@@ -9,5 +9,5 @@ import { RecipeLoadError } from '../../../../models/errors.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ErrorListItemComponent {
-  @Input({ required: true }) error!: RecipeLoadError;
+  @Input({ required: true }) error!: ApiLoadError;
 }

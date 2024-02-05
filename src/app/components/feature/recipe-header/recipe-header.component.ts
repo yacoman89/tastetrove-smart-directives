@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RecipePreview } from '../../../models/recipe.model';
-import { RecipeLoadError } from '../../../models/errors.model';
+import { ApiLoadError } from '../../../models/errors.model';
 import { CommonModule } from '@angular/common';
 import { LoadingRecipeHeaderComponent } from './loading-recipe-header/loading-recipe-header.component';
 import { RatingComponent } from '../../common/rating/rating.component';
@@ -19,6 +19,6 @@ import { faClock } from '@fortawesome/free-solid-svg-icons';
 export class RecipeHeaderComponent {
   @Input() recipePreview?: RecipePreview;
   @Input() loading?: boolean;
-  @Input() error?: RecipeLoadError | null;
+  @Input() error?: ApiLoadError | null;
   readonly clockIcon = faClock;
 }

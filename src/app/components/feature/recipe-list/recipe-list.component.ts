@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RecipePreview } from '../../../models/recipe.model';
-import { RecipeLoadError } from '../../../models/errors.model';
+import { ApiLoadError } from '../../../models/errors.model';
 import { RecipeListItemComponent } from './recipe-list-item/recipe-list-item.component';
-import { Tag } from '../../../models/tags.model';
 import { LoadingListItemComponent } from './loading-list-item/loading-list-item.component';
 import { ErrorListItemComponent } from './error-list-item/error-list-item.component';
+import { Tag } from '../../../models/tag.model';
 
 @Component({
   selector: 'tt-recipe-list',
@@ -17,7 +17,7 @@ import { ErrorListItemComponent } from './error-list-item/error-list-item.compon
 export class RecipeListComponent {
   @Input() recipes?: RecipePreview[];
   @Input() loading?: boolean;
-  @Input() error?: RecipeLoadError | null;
+  @Input() error?: ApiLoadError | null;
   @Input() excludeTags?: Tag[];
   @Input() ghostLoadingRowCount?: number;
 

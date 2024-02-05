@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "jsrv": "json-server --watch ./mock_server/db.json",
+    "jsrv": "json-server --watch --routes ./mock_server/routes.json ./mock_server/db.json",
     "prejsrv": "node ./mock_server/create-db-file.js"
   },
   "private": true,

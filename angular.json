@@ -8,7 +8,8 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss",
-          "standalone": true,          "changeDetection": "OnPush"
+          "standalone": true,
+          "changeDetection": "OnPush"
         }
       },
       "root": "",
@@ -65,6 +66,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "src/proxy.conf.js"
+          },
           "configurations": {
             "production": {
               "buildTarget": "frontrunners24:build:production"
