@@ -5,6 +5,8 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 import { routes } from './app.routes';
 import { environment } from '../environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+import { IMAGE_CONFIG } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +22,11 @@ export const appConfig: ApplicationConfig = {
           }
         }
       ),
-      NgxsReduxDevtoolsPluginModule.forRoot({ disabled: environment.production })
-    )
+      NgxsReduxDevtoolsPluginModule.forRoot({ disabled: environment.production }),
+      HttpClientModule
+    ),
+    {
+      provide: IMAGE_CONFIG, useValue: { disableImageSizeWarning: true }
+    }
   ]
 };

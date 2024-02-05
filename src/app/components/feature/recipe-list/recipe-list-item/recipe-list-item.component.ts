@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
-import { Tag } from '../../../../models/tags.model';
 import { RecipePreview } from '../../../../models/recipe.model';
 import { RatingComponent } from '../../../common/rating/rating.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -9,6 +8,7 @@ import { ChipComponent } from '../../../common/chip/chip.component';
 import { RouterModule } from '@angular/router';
 import { OverlayComponent } from '../../../common/overlay/overlay.component';
 import { RecipePreviewComponent } from '../../recipe-preview/recipe-preview.component';
+import { Tag } from '../../../../models/tag.model';
 
 @Component({
   selector: 'tt-recipe-list-item',

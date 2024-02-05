@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { RecipeLoadError } from '../../../models/errors.model';
-import { RecipeInstruction } from '../../../models/recipe.model';
+import { ApiLoadError } from '../../../models/errors.model';
+import { Instruction } from '../../../models/instruction.model';
 
 @Component({
   selector: 'tt-recipe-instructions',
@@ -10,7 +10,7 @@ import { RecipeInstruction } from '../../../models/recipe.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecipeInstructionsComponent {
-  @Input() instructions?: RecipeInstruction[];
+  @Input() instructions?: Instruction[];
   @Input() loading?: boolean;
-  @Input() error?: RecipeLoadError | null;
+  @Input() error?: ApiLoadError | null;
 }

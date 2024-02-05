@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Comment } from '../../../../models/recipe.model';
 import { CommonModule } from '@angular/common';
 import { TextareaComponent } from '../../../common/form-fields/textarea/textarea.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable, map, shareReplay, startWith } from 'rxjs';
+import { Comment } from '../../../../models/comment.model';
 
 @Component({
   selector: 'tt-new-comment',

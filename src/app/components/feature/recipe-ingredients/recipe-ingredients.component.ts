@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { RecipeIngredient } from '../../../models/recipe.model';
-import { RecipeLoadError } from '../../../models/errors.model';
+import { ApiLoadError } from '../../../models/errors.model';
 import { CommonModule } from '@angular/common';
+import { Ingredient } from '../../../models/ingredient.model';
 
 @Component({
   selector: 'tt-recipe-ingredients',
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class RecipeIngredientsComponent {
-  @Input() ingredients?: RecipeIngredient[];
+  @Input() ingredients?: Ingredient[];
   @Input() loading?: boolean;
-  @Input() error?: RecipeLoadError | null;
+  @Input() error?: ApiLoadError | null;
 }

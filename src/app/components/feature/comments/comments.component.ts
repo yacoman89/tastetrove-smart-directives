@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Comment } from '../../../models/recipe.model';
 import { CommonModule } from '@angular/common';
 import { NewCommentComponent } from './new-comment/new-comment.component';
-import { RecipeLoadError } from '../../../models/errors.model';
+import { ApiLoadError } from '../../../models/errors.model';
 import { CommentComponent } from './comment/comment.component';
+import { Comment } from '../../../models/comment.model';
 
 @Component({
   selector: 'tt-comments',
@@ -17,7 +17,7 @@ export class CommentsComponent {
   @Input({ required: true }) user!: string
   @Input() comments?: Comment[];
   @Input() loading?: boolean;
-  @Input() error?: RecipeLoadError | null;
+  @Input() error?: ApiLoadError | null;
 
   onComment(comment: Comment): void {
     console.log('new comment:', comment);
