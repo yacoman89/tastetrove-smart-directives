@@ -41,3 +41,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Mock server files
+mock_server/db.json
+mock_server/routes.json
