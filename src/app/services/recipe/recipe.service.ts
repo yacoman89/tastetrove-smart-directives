@@ -35,7 +35,6 @@ import {
   CommentsLinkTemplate,
 } from '../../models/comment.model';
 import { ApiLoadError } from '../../models/errors.model';
-import { TagService } from '../tag/tag.service';
 import { TagLinkRegex, TagLinkTemplate } from '../../models/tag.model';
 
 @Injectable({ providedIn: 'root' })
@@ -88,20 +87,34 @@ export class RecipeService {
     return { href: TagLinkTemplate.replace(TagLinkRegex, `${id}`) };
   }
 
-  constructor(private http: HttpClient, private tagService: TagService) {}
+  constructor(private http: HttpClient) {}
 
   fetchRecipes(url: string): Observable<RecipePreview[]> {
     return this.http.get<DbRecipe[]>(url).pipe(
-      map((recipes) => this.addRecipeLinkRelations(recipes)),
-      switchMap((recipes) => this.fetchRecipesTags(recipes)),
+      map((recipes) => this.addRecipesLinkRelations(recipes)),
+      switchMap((recipes) => this.fetchRecipesTagsAndAdd(recipes)),
       catchError((error) =>
         throwError(() => new ApiLoadError('Failed to load recipes', error))
       )
     );
   }
 
-  private addRecipeLinkRelations(recipes: DbRecipe[]): RecipePreview[] {
-    return recipes.map((recipe) => ({
+  fetchRecipe(url: string): Observable<RecipePreview> {
+    return this.http.get<DbRecipe[]>(url).pipe(
+      map((recipes) => this.addRecipeLinkRelations(recipes[0])),
+      switchMap((recipe) => this.fetchRecipeTagsAndAdd(recipe)),
+      catchError((error) =>
+        throwError(() => new ApiLoadError('Failed to load recipes', error))
+      )
+    );
+  }
+
+  private addRecipesLinkRelations(recipes: DbRecipe[]): RecipePreview[] {
+    return recipes.map((recipe) => this.addRecipeLinkRelations(recipe));
+  }
+
+  private addRecipeLinkRelations(recipe: DbRecipe): RecipePreview {
+    return {
       ...recipe,
       _links: {
         self: RecipeService.buildSelfLink(recipe.id),
@@ -110,18 +123,22 @@ export class RecipeService {
         instructions: RecipeService.buildInstructionsLink(recipe.id),
         comments: RecipeService.buildCommentsLink(recipe.id),
       },
-    }));
+    };
   }
 
-  private fetchRecipesTags(
+  private fetchRecipesTagsAndAdd(
     recipes: RecipePreview[]
   ): Observable<RecipePreview[]> {
     return forkJoin(
-      recipes.map((recipe) => {
-        return this.fetchRecipeTags(recipe._links.tags.href).pipe(
-          map((tags) => ({ ...recipe, tags }))
-        );
-      })
+      recipes.map((recipe) => this.fetchRecipeTagsAndAdd(recipe))
+    );
+  }
+
+  private fetchRecipeTagsAndAdd(
+    recipe: RecipePreview
+  ): Observable<RecipePreview> {
+    return this.fetchRecipeTags(recipe._links.tags.href).pipe(
+      map((tags) => ({ ...recipe, tags }))
     );
   }
 
@@ -137,13 +154,19 @@ export class RecipeService {
   private appRecipeTagsLinkRelations(
     recipeTags: DbRecipeTag[]
   ): BaseRecipeTag[] {
-    return recipeTags.map((recipeTag) => ({
+    return recipeTags.map((recipeTag) =>
+      this.appRecipeTagLinkRelations(recipeTag)
+    );
+  }
+
+  private appRecipeTagLinkRelations(recipeTag: DbRecipeTag): BaseRecipeTag {
+    return {
       ...recipeTag,
       _links: {
         self: RecipeService.buildRecipeTagSelfLink(recipeTag.id),
         tag: RecipeService.buildRecipeTagTagLink(recipeTag.tagId),
         recipe: RecipeService.buildRecipeTagRecipeLink(recipeTag.recipeId),
       },
-    }));
+    };
   }
 }
