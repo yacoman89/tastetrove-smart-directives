@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { DbTag, Tag } from '../../models/tag.model';
 import { ApiLoadError } from '../../models/errors.model';
 
@@ -15,7 +15,8 @@ export class TagService {
   }
 
   fetchTag(url: string): Observable<Tag> {
-    return this.http.get<DbTag>(url).pipe(
+    return this.http.get<DbTag[]>(url).pipe(
+      map((tags) => tags[0]),
       catchError((error) => throwError(() => new ApiLoadError('Failed to load tag', error)))
     );
   }

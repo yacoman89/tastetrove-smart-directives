@@ -4,14 +4,22 @@
   <div>
     <h2 class="mb-3 text-xl font-semibold">Recipe Spotlight</h2>
     <tt-card>
-      <tt-recipe-preview [recipe]="recipes[0]"></tt-recipe-preview>
+      @if ((recipeListLoading$ | async) === false && (recipeSpotlight$ | async)) {
+        <tt-recipe-preview [recipe]="(recipeSpotlight$ | async) || fakeSpotlight"></tt-recipe-preview>
+      } @else {
+        Loading...
+      }
     </tt-card>
   </div>
 
   <div >
     <h2 class="mb-3 text-xl font-semibold">Recently Added Recipes</h2>
     <tt-card>
-      <tt-recipe-list [recipes]="recipes" [loading]="loading" [error]="error"></tt-recipe-list>
+      <tt-recipe-list
+        [recipes]="(recipeList$ | async) ?? []"
+        [loading]="(recipeListLoading$ | async) ?? true"
+        [error]="recipeListError$ | async"
+      ></tt-recipe-list>
     </tt-card>
   </div>
 </div>
