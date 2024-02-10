@@ -10,7 +10,7 @@ export const routes: Routes = [
     loadComponent: () => import('./components/pages/recipe-view-page/recipe-view-page.component').then((mod) => mod.RecipeViewPageComponent)
   },
   {
-    path: 'list/:tag',
+    path: 'list/:tagLink',
     loadComponent: () => import('./components/pages/recipe-list-page/recipe-list-page.component').then((mod) => mod.RecipeListPageComponent)
   },
   {

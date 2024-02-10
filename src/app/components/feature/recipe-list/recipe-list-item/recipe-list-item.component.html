@@ -25,7 +25,7 @@
     </a>
     <div class="ml-16 px-2 sm:flex sm:flex-row gap-3 sm:items-end">
       @for (tag of recipe.tags; track $index) {
-        <tt-chip [title]="tag.title" [color]="tag.color" [asLink]="'/list/' + tag.title"></tt-chip>
+        <tt-chip [title]="tag.title" [color]="tag.color" [asLink]="['/list/', tag._links.tag.href]"></tt-chip>
       }
     </div>
   </span>

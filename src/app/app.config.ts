@@ -7,6 +7,7 @@ import { routes } from './app.routes';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { IMAGE_CONFIG } from '@angular/common';
+import { RecipesLinkProvider, WindowProvider } from './providers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,6 +26,8 @@ export const appConfig: ApplicationConfig = {
       NgxsReduxDevtoolsPluginModule.forRoot({ disabled: environment.production }),
       HttpClientModule
     ),
+    RecipesLinkProvider,
+    WindowProvider,
     {
       provide: IMAGE_CONFIG, useValue: { disableImageSizeWarning: true }
     }
