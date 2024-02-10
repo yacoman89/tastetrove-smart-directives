@@ -14,6 +14,10 @@ export class RecipesStateFacade {
     return this.store.select(RecipesState.recipeList(fetchLink));
   }
 
+  recipesByTag$(tagLink: string): Observable<(RecipePreview | Recipe)[]> {
+    return this.store.select(RecipesState.recipesByTag(tagLink));
+  }
+
   recipeListLoading$(fetchLink: string): Observable<boolean> {
     return this.store.select(RecipesState.recipeListLoading(fetchLink));
   }

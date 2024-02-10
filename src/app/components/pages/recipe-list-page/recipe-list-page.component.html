@@ -1,2 +1,22 @@
-<h2 class="mb-3 text-xl font-semibold">Recipe List Page</h2>
-Recipes matching selected tag go here
+<div class="w-full h-fit p-5 flex flex-col">
+  <span class="flex flex-row gap-5 align-middle mb-3">
+    <h2 class="text-xl font-semibold">Recipes Tagged With:</h2>
+    @if (tag$ | async) {
+      <tt-chip
+        class="h-fit"
+        [title]="(tag$ | async)?.title ?? placeholderChipTitle"
+        [color]="(tag$ | async)?.color ?? placeholderChipColor"
+      />
+    } @else {
+      Loading...
+    }
+  </span>
+  <tt-card>
+    <tt-recipe-list
+      [recipes]="(recipeList$ | async) ?? []"
+      [loading]="(recipeListLoading$ | async) ?? true"
+      [error]="recipeListError$ | async"
+      [ghostLoadingRowCount]="3"
+    ></tt-recipe-list>
+  </tt-card>
+</div>

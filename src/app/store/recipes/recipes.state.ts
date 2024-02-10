@@ -59,6 +59,17 @@ export class RecipesState {
     });
   }
 
+  static recipesByTag(tagLink: string): (state: RecipesStateModel) => (RecipePreview | Recipe)[] {
+    return createSelector([RecipesState], (state) => {
+      return Object.keys(state.recipes).reduce((recipes, link) => {
+        const recipe = state.recipes[link];
+        const hasTag = !!(recipe.recipe.tags?.find((tag) => tag._links.tag.href === tagLink));
+        if (hasTag) recipes.push(recipe.recipe);
+        return recipes;
+      }, new Array<RecipePreview | Recipe>());
+    });
+  }
+
   static recipeListLoading(key: string): (entity: RecipeListEntityModel) => boolean {
     return createSelector([RecipesState.recipeListEntity(key)], (entity) => entity.loading);
   }
