@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, forkJoin, map, switchMap, throwError } from 'rxjs';
+import { Observable, catchError, forkJoin, map, of, switchMap, throwError } from 'rxjs';
 import { ApiLoadError } from '../../models/errors.model';
 import { Link } from '../../models/hateoas.model';
 import { RecipeService } from '../recipe/recipe.service';
@@ -39,6 +39,7 @@ export class CommentService {
   }
 
   private fetchUsersForComments(comments: Comment[]): Observable<Comment[]> {
+    if (comments.length === 0) return of(comments);
     return forkJoin(comments.map((comment) => this.fetchUserForComment(comment._links.user.href).pipe(map((user) => ({ ...comment, ...user })))));
   }
 

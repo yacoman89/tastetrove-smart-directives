@@ -5,6 +5,7 @@ import {
   catchError,
   forkJoin,
   map,
+  of,
   switchMap,
   throwError,
 } from 'rxjs';
@@ -129,6 +130,7 @@ export class RecipeService {
   private fetchRecipesTagsAndAdd(
     recipes: RecipePreview[]
   ): Observable<RecipePreview[]> {
+    if (recipes.length == 0) return of(recipes);
     return forkJoin(
       recipes.map((recipe) => this.fetchRecipeTagsAndAdd(recipe))
     );

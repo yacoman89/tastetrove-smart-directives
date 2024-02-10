@@ -1,26 +1,40 @@
 <div class="w-full h-fit p-5 flex flex-col gap-10 items-center justify-center">
   <tt-card class="w-[60rem]">
-    <tt-recipe-header [recipePreview]="preview" [loading]="loading()"></tt-recipe-header>
+    {{ recipeLoading$ | async }}
+    <tt-recipe-header
+      [recipePreview]="(recipe$ | async) ?? undefined"
+      [loading]="(recipeLoading$ | async) ?? true"
+    />
   </tt-card>
 
   <div class="w-[60rem]">
     <h2 class="mb-3 text-xl font-semibold">Ingredients</h2>
     <tt-card>
-      <tt-recipe-ingredients [ingredients]="ingredients" [loading]="loading()"></tt-recipe-ingredients>
+      <tt-recipe-ingredients
+        [ingredients]="(ingredients$ | async) ?? undefined"
+        [loading]="(ingredientsLoading$ | async) ?? true"
+      />
     </tt-card>
   </div>
 
   <div class="w-[60rem]">
     <h2 class="mb-3 text-xl font-semibold">Instructions</h2>
     <tt-card>
-      <tt-recipe-instructions [instructions]="instructions" [loading]="loading()"></tt-recipe-instructions>
+      <tt-recipe-instructions
+        [instructions]="(instructions$ | async) ?? undefined"
+        [loading]="(instructionsLoading$ | async) ?? true"
+      />
     </tt-card>
   </div>
 
   <div class="w-[60rem]">
     <h2 class="mb-3 text-xl font-semibold">Comments</h2>
     <tt-card>
-      <tt-comments [user]="user" [comments]="comments" [loading]="loading()"></tt-comments>
+      <tt-comments
+        [user]="user"
+        [comments]="(comments$ | async) ?? undefined"
+        [loading]="(commentsLoading$ | async) ?? true"
+      />
     </tt-card>
   </div>
 </div>
