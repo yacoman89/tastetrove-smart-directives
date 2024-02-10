@@ -1,3 +1,4 @@
+import { RatingComponent } from '../components/common/rating/rating.component';
 import { HateoasObject, LinkRelations, SelfLinkRelation } from './hateoas.model';
 import { Ingredient } from './ingredient.model';
 import { Instruction } from './instruction.model';
@@ -44,3 +45,19 @@ export interface Recipe extends RecipePreview {
   instructions: Instruction[];
   comments: Comment[];
 }
+
+export const PlaceholderRecipe: RecipePreview = {
+  id: -1,
+  name: 'placeholder only',
+  difficulty: Difficulty.EASY,
+  duration: '',
+  rating: 1,
+  imageUrl: '',
+  _links: {
+    self: { href: '#' },
+    ingredients: { href: '#' },
+    instructions: { href: '#' },
+    tags: { href: '#' },
+    comments: { href: '#' }
+  }
+};

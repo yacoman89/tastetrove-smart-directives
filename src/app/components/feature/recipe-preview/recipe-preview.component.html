@@ -1,16 +1,22 @@
 <div class="flex flex-row gap-5 p-5">
-  <img class="h-48 w-48 flex-none rounded-full bg-gray-50" [src]="recipe.imageUrl" alt="recipe thumbnail">
-  <span class="flex flex-col justify-around">
-    <span class="flex flex-row gap-5 justify-center">
-      <p class="self-center text-2xl font-bold leading-6 text-gray-900">{{ recipe.name }}</p>
-      <tt-rating class="self-center" [value]="recipe.rating"></tt-rating>
-    </span>
-    <span class="flex flex-row gap-5">
-      <span class="self-center">
-        <fa-icon [icon]="clockIcon"></fa-icon>
-        {{ recipe.duration }}
+  @if (loading) {
+    <tt-loading-recipe-preview />
+  } @else if (error) {
+    Error
+  } @else {
+    <img class="h-48 w-48 flex-none rounded-full bg-gray-50" [src]="recipe?.imageUrl" alt="recipe thumbnail">
+    <span class="flex flex-col justify-around">
+      <span class="flex flex-row gap-5 justify-center">
+        <p class="self-center text-2xl font-bold leading-6 text-gray-900">{{ recipe?.name }}</p>
+        <tt-rating class="self-center" [value]="recipe?.rating ?? placeholderRating"></tt-rating>
       </span>
-      <tt-difficulty class="self-center" [value]="recipe.difficulty"></tt-difficulty>
+      <span class="flex flex-row gap-5">
+        <span class="self-center">
+          <fa-icon [icon]="clockIcon"></fa-icon>
+          {{ recipe?.duration }}
+        </span>
+        <tt-difficulty class="self-center" [value]="recipe?.difficulty ?? placeholderDifficulty"></tt-difficulty>
+      </span>
     </span>
-  </span>
+  }
 </div>
