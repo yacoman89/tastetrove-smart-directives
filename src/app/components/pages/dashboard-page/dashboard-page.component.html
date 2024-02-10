@@ -1,14 +1,13 @@
 <div class="w-full h-fit p-5 flex flex-col gap-10">
-  <h1>Dashboard</h1>
+  <h1 class="sr-only">Dashboard</h1>
 
   <div>
     <h2 class="mb-3 text-xl font-semibold">Recipe Spotlight</h2>
     <tt-card>
-      @if ((recipeListLoading$ | async) === false && (recipeSpotlight$ | async)) {
-        <tt-recipe-preview [recipe]="(recipeSpotlight$ | async) || fakeSpotlight"></tt-recipe-preview>
-      } @else {
-        Loading...
-      }
+      <tt-recipe-preview
+        [loading]="(recipeListLoading$ | async) ?? true"
+        [recipe]="(recipeSpotlight$ | async) ?? placeholderRecipe"
+      ></tt-recipe-preview>
     </tt-card>
   </div>
 
@@ -19,6 +18,7 @@
         [recipes]="(recipeList$ | async) ?? []"
         [loading]="(recipeListLoading$ | async) ?? true"
         [error]="recipeListError$ | async"
+        [ghostLoadingRowCount]="5"
       ></tt-recipe-list>
     </tt-card>
   </div>
