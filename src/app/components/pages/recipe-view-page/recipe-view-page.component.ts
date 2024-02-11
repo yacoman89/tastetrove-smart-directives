@@ -1,33 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, Inject } from '@angular/core';
 import { RecipeHeaderComponent } from '../../feature/recipe-header/recipe-header.component';
 import { RecipeInstructionsComponent } from '../../feature/recipe-instructions/recipe-instructions.component';
 import { RecipeIngredientsComponent } from '../../feature/recipe-ingredients/recipe-ingredients.component';
 import { CardComponent } from '../../common/card/card.component';
-import { Difficulty, RecipePreview, RecipeTag} from '../../../models/recipe.model';
-import { Color } from '../../../models/colors.model';
+import { Recipe, RecipePreview } from '../../../models/recipe.model';
 import { CommentsComponent } from '../../feature/comments/comments.component';
 import { Ingredient } from '../../../models/ingredient.model';
 import { Instruction } from '../../../models/instruction.model';
 import { Comment } from '../../../models/comment.model';
-
-const tagLinks = { self: { href: '' }, tag: { href: '' }, recipe: { href: '' } };
-const veggiesTag: RecipeTag = {
-  id: 0,
-  recipeId: 0,
-  tagId: 0,
-  title: 'Veggies',
-  color: Color.GREEN_1,
-  _links: tagLinks
-};
-const dinnerTag: RecipeTag = {
-  id: 0,
-  recipeId: 0,
-  tagId: 0,
-  title: 'Dinner',
-  color: Color.INDIGO_1,
-  _links: tagLinks
-};
+import { RecipesStateFacade } from '../../../store/recipes/recipes.state.facade';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, map, shareReplay, switchMap } from 'rxjs';
+import { ApiLoadError } from '../../../models/errors.model';
+import { USER } from '../../../providers';
+import { IngredientsStateFacade } from '../../../store/ingredients/ingredients.state.facade';
+import { RecipesStateModule } from '../../../store/recipes/recipes.state.module';
+import { IngredientsStateModule } from '../../../store/ingredients/ingredients.state.module';
+import { InstructionsStateModule } from '../../../store/instructions/instructions.state.module';
+import { CommentsStateModule } from '../../../store/comments/comments.state.module';
+import { InstructionsStateFacade } from '../../../store/instructions/instructions.state.facade';
+import { CommentsStateFacade } from '../../../store/comments/comments.state.facade';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'tt-recipe-view-page',
@@ -35,57 +29,70 @@ const dinnerTag: RecipeTag = {
   styleUrl: './recipe-view-page.component.scss',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, CardComponent, RecipeHeaderComponent, RecipeIngredientsComponent, RecipeInstructionsComponent, CommentsComponent]
+  imports: [
+    CommonModule,
+    CardComponent,
+    RecipeHeaderComponent,
+    RecipeIngredientsComponent,
+    RecipeInstructionsComponent,
+    CommentsComponent,
+    RecipesStateModule,
+    IngredientsStateModule,
+    InstructionsStateModule,
+    CommentsStateModule
+  ]
 })
-export class RecipeViewPageComponent implements OnInit {
-  readonly user = 'Test user';
-  readonly preview: RecipePreview = {
-    id: 0,
-    name: 'Roasted Brussels Sprouts',
-    difficulty: Difficulty.INTERMEDIATE,
-    duration: '45 mins',
-    rating: 2,
-    tags: [veggiesTag, dinnerTag],
-    imageUrl: 'assets/brussels-sprouts.jpg',
-    _links: {
-      self: { href: '' },
-      comments: { href: '' },
-      ingredients: { href: '' },
-      instructions: { href: '' },
-      tags: { href: '' }
-    }
-  };
-  readonly ingredients: Ingredient[] = [
-    { id: 0, recipeId: 0, name: 'Fresh Brussels Sprouts', quantity: '3 lbs', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, name: 'Thick Cut Bacon', quantity: '1 lb', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, name: 'Olive Oil', quantity: '3 tbsp', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, name: 'Salt', quantity: 'to taste', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, name: 'Pepper', quantity: 'to taste', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, name: 'Balsamic Glaze', quantity: 'for serving', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, name: 'Parmesan Cheese', quantity: 'for serving', _links: { self: { href: '' }, recipe: { href: '' } } }
-  ];
-  readonly instructions: Instruction[] = [
-    { id: 0, recipeId: 0, number: 1, instructions: 'Preheat oven to 400F.', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, number: 2, instructions: 'Wash and cut all Brussels sprouts in half then spread out on a baking sheet.', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, number: 3, instructions: 'Cut bacon into small chunks, about 1/2" x 1/2", and distribute all around brussels sprouts on the baking sheet.', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, number: 4, instructions: 'Spread olive oil, salt, and pepper on top of everything.', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, number: 5, instructions: 'Mix all items in the baking sheet around to coat everything and evenly spread out.', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, number: 6, instructions: 'Put baking sheet in the oven for 25 minutes.', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, number: 7, instructions: 'After 25 minutes, take out baking sheet and mix everything up and spread back out on baking sheet.', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, number: 8, instructions: 'Put baking sheet back in the oven for 20 more minutes.', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, number: 10, instructions: 'Take baking sheet out and let cool for 5 minutes.', _links: { self: { href: '' }, recipe: { href: '' } } },
-    { id: 0, recipeId: 0, number: 11, instructions: 'Take baking sheet out and let cool for 5 minutes.', _links: { self: { href: '' }, recipe: { href: '' } } }
-  ];
-  readonly comments: Comment[] = [
-    { id: 0, recipeId: 0, userId: 0, user: 'Mike', date: (new Date()).toISOString(), comment: 'this was way to hard for me', _links: { self: { href: '' }, recipe: { href: '' }, user: { href: '' } } },
-    // { id: 0, recipeId: 0, userId: 0, user: 'Mary', date: (new Date()).toISOString(), comment: 'this was way to hard for me', _links: { self: { href: '' }, recipe: { href: '' }, user: { href: '' } } },
-    // { id: 0, recipeId: 0, userId: 0, user: 'Linda', date: (new Date()).toISOString(), comment: 'this was way to hard for me', _links: { self: { href: '' }, recipe: { href: '' }, user: { href: '' } } },
-    // { id: 0, recipeId: 0, userId: 0, user: 'Steve', date: (new Date()).toISOString(), comment: 'this was way to hard for me', _links: { self: { href: '' }, recipe: { href: '' }, user: { href: '' } } },
-  ];
+export class RecipeViewPageComponent {
+  recipe$: Observable<Recipe | RecipePreview>;
+  recipeLoading$: Observable<boolean>;
+  recipeLoadError$: Observable<ApiLoadError | null>;
 
-  readonly loading = signal(true);
+  ingredients$: Observable<Ingredient[]>;
+  ingredientsLoading$: Observable<boolean>;
+  ingredientsError$: Observable<ApiLoadError | null>;
 
-  ngOnInit(): void {
-    setTimeout(() => this.loading.set(false), 5000);
+  instructions$: Observable<Instruction[]>;
+  instructionsLoading$: Observable<boolean>;
+  instructionsError$: Observable<ApiLoadError | null>;
+
+  comments$: Observable<Comment[]>;
+  commentsLoading$: Observable<boolean>;
+  commentsError$: Observable<ApiLoadError | null>;
+
+  constructor(
+    @Inject(USER) public user: string,
+    route: ActivatedRoute,
+    destroyRef: DestroyRef,
+    recipesStateFacade: RecipesStateFacade,
+    ingredientsStateFacade: IngredientsStateFacade,
+    instructionsStateFacade: InstructionsStateFacade,
+    commentsStateFacade: CommentsStateFacade
+  ) {
+    const recipeLink$ = route.params.pipe(map((params) => params?.['recipeLink']));
+    this.recipe$ = recipeLink$.pipe(switchMap((link) => recipesStateFacade.recipe$(link)), shareReplay(1));
+    this.recipeLoading$ = recipeLink$.pipe(switchMap((link) => recipesStateFacade.recipeLoading$(link)), shareReplay(1));
+    this.recipeLoadError$ = recipeLink$.pipe(switchMap((link) => recipesStateFacade.recipeError$(link)));
+
+    const ingredientsLink$ = this.recipe$.pipe(map((recipe) => recipe._links.ingredients.href));
+    this.ingredients$ = ingredientsLink$.pipe(switchMap((link) => ingredientsStateFacade.ingredients$(link)));
+    this.ingredientsLoading$ = ingredientsLink$.pipe(switchMap((link) => ingredientsStateFacade.loading$(link)));
+    this.ingredientsError$ = ingredientsLink$.pipe(switchMap((link) => ingredientsStateFacade.error$(link)));
+
+    const instructionsLink$ = this.recipe$.pipe(map((recipe) => recipe._links.instructions.href));
+    this.instructions$ = instructionsLink$.pipe(switchMap((link) => instructionsStateFacade.instructions$(link)));
+    this.instructionsLoading$ = instructionsLink$.pipe(switchMap((link) => instructionsStateFacade.loading$(link)));
+    this.instructionsError$ = instructionsLink$.pipe(switchMap((link) => instructionsStateFacade.error$(link)));
+
+    const commentsLink$ = this.recipe$.pipe(map((recipe) => recipe._links.comments.href));
+    this.comments$ = commentsLink$.pipe(switchMap((link) => commentsStateFacade.comments$(link)));
+    this.commentsLoading$ = commentsLink$.pipe(switchMap((link) => commentsStateFacade.loading$(link)));
+    this.commentsError$ = commentsLink$.pipe(switchMap((link) => commentsStateFacade.error$(link)));
+
+    this.recipe$.pipe(takeUntilDestroyed(destroyRef)).subscribe((recipe) => {
+      const links = recipe._links;
+      ingredientsStateFacade.fetchIngredients(links.ingredients.href);
+      instructionsStateFacade.fetchInstructions(links.instructions.href);
+      commentsStateFacade.fetchComments(links.comments.href);
+    });
   }
 }
