@@ -142,6 +142,7 @@ export class RecipesState {
         this.tagService.fetchTag(recipeTag._links.tag.href).pipe(map((tag) => ({ ...recipeTag, ...tag })))
       )).pipe(tap((tags) => manager.recipePatch = { loading: false, recipe: { ...recipePreview, tags } }));
     }
+    manager.recipePatch = { loading: false };
     return of(manager.recipeEntity);
   }
 }
