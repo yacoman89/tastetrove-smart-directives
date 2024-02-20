@@ -22,6 +22,7 @@ import { CommentsStateModule } from '../../../store/comments/comments.state.modu
 import { InstructionsStateFacade } from '../../../store/instructions/instructions.state.facade';
 import { CommentsStateFacade } from '../../../store/comments/comments.state.facade';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'tt-recipe-view-page',
@@ -59,8 +60,9 @@ export class RecipeViewPageComponent {
   commentsLoading$: Observable<boolean>;
   commentsError$: Observable<ApiLoadError | null>;
 
+  user$: Observable<User>;
+
   constructor(
-    @Inject(USER) public user: string,
     route: ActivatedRoute,
     destroyRef: DestroyRef,
     recipesStateFacade: RecipesStateFacade,
@@ -87,6 +89,8 @@ export class RecipeViewPageComponent {
     this.comments$ = commentsLink$.pipe(switchMap((link) => commentsStateFacade.comments$(link)));
     this.commentsLoading$ = commentsLink$.pipe(switchMap((link) => commentsStateFacade.loading$(link)));
     this.commentsError$ = commentsLink$.pipe(switchMap((link) => commentsStateFacade.error$(link)));
+
+    this.user$ = commentsStateFacade.user$;
 
     this.recipe$.pipe(takeUntilDestroyed(destroyRef)).subscribe((recipe) => {
       const links = recipe._links;
