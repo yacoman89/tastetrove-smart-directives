@@ -29,7 +29,7 @@
   } @else if (instructions) {
     <ol role="list" class="space-y-3 text-gray-600">
       @for (instruction of instructions; track $index) {
-        <li class="flex gap-3 items-center text-sm text-gray-900">
+        <li class="flex gap-3 items-start text-sm text-gray-900">
           <span class="w-5">{{ instruction.number }}.</span>
           <p>{{ instruction.instructions }}</p>
         </li>

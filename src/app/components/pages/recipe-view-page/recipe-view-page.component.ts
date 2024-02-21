@@ -22,6 +22,7 @@ import { InstructionsStateFacade } from '../../../store/instructions/instruction
 import { CommentsStateFacade } from '../../../store/comments/comments.state.facade';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { User } from '../../../models/user.model';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'tt-recipe-view-page',
@@ -68,8 +69,10 @@ export class RecipeViewPageComponent {
     recipesStateFacade: RecipesStateFacade,
     ingredientsStateFacade: IngredientsStateFacade,
     instructionsStateFacade: InstructionsStateFacade,
-    private commentsStateFacade: CommentsStateFacade
+    private commentsStateFacade: CommentsStateFacade,
+    title: Title
   ) {
+    title.setTitle('TasteTrove | Loading...');
     const recipeLink$ = route.params.pipe(map((params) => params?.['recipeLink']));
     this.recipe$ = recipeLink$.pipe(switchMap((link) => recipesStateFacade.recipe$(link)), shareReplay(1));
     this.recipeLoading$ = recipeLink$.pipe(switchMap((link) => recipesStateFacade.recipeLoading$(link)), shareReplay(1));
@@ -93,6 +96,7 @@ export class RecipeViewPageComponent {
     this.user$ = commentsStateFacade.user$;
 
     this.recipe$.pipe(takeUntilDestroyed(destroyRef), filter((recipe) => !!recipe)).subscribe((recipe) => {
+      title.setTitle(`TasteTrove | ${recipe.name}`);
       this.currentRecipe = recipe;
       const links = recipe._links;
       ingredientsStateFacade.fetchIngredients(links.ingredients.href);

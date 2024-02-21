@@ -9,6 +9,7 @@ import { Observable, filter, interval, map, shareReplay, startWith, switchMap } 
 import { CommonModule } from '@angular/common';
 import { ApiLoadError } from '../../../models/errors.model';
 import { RECIPES_LIST_LINK } from '../../../providers';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'tt-dashboard-page',
@@ -25,7 +26,8 @@ export class DashboardPageComponent {
   recipeListError$: Observable<ApiLoadError | null>;
   readonly placeholderRecipe = PlaceholderRecipe  // NOTE: only needed since async pipe can also be null;
 
-  constructor(@Inject(RECIPES_LIST_LINK) recipesLink: string, recipesStateFacade: RecipesStateFacade) {
+  constructor(@Inject(RECIPES_LIST_LINK) recipesLink: string, recipesStateFacade: RecipesStateFacade, title: Title) {
+    title.setTitle('TasteTrove | Dashboard');
     this.recipeList$ = recipesStateFacade.recipeList$(recipesLink) as Observable<RecipePreview[]>;
     this.recipeListLoading$ = recipesStateFacade.recipeListLoading$(recipesLink);
     this.recipeListError$ = recipesStateFacade.recipeListError$(recipesLink);

@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CREATE_READY } from '../../../providers';
 
 @Component({
   selector: 'tt-navbar',
@@ -9,4 +10,6 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterModule]
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  constructor(@Inject(CREATE_READY) public createReady: boolean) {}
+}
