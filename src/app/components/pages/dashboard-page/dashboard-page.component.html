@@ -5,11 +5,15 @@
     <h2 class="mb-3 text-xl font-semibold">Recipe Spotlight</h2>
     <tt-card>
       <tt-recipe-preview
-        #recipeSpotlight
+        #recipeSpotlightComponent
+        ttRecipeList
         ttRecipeSpotlight
-        (recipeSpotlight)="recipeSpotlight.recipe = $event"
-        (recipesLoading)="recipeSpotlight.loading = $event"
-        (recipesError)="recipeSpotlight.error = $event"
+        #recipeSpotlightDir="ttRecipeSpotlightDir"
+        [recipesLink]="recipeListLink"
+        (recipeListLoading)="recipeSpotlightComponent.loading = $event"
+        (recipeListError)="recipeSpotlightComponent.error = $event"
+        (recipeList)="recipeSpotlightDir.recipes = $event"
+        (recipeSpotlight)="recipeSpotlightComponent.recipe = ($event ?? undefined)"
       ></tt-recipe-preview>
     </tt-card>
   </div>
@@ -19,11 +23,12 @@
     <tt-card>
       <tt-recipe-list
         #recipesList
-        ttRecentRecipes
+        ttRecipeList
         [ghostLoadingRowCount]="5"
-        (recipesList)="recipesList.recipes = $event"
-        (recipesListLoading)="recipesList.loading = $event"
-        (recipesListError)="recipesList.error = $event"
+        [recipesLink]="recipeListLink"
+        (recipeList)="recipesList.recipes = $event"
+        (recipeListLoading)="recipesList.loading = $event"
+        (recipeListError)="recipesList.error = $event"
       ></tt-recipe-list>
     </tt-card>
   </div>

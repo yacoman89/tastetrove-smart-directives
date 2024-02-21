@@ -1,0 +1,9 @@
+@if (loading || error) {
+  Loading...
+} @else {
+  <tt-chip
+    class="h-fit"
+    [title]="tag?.title ?? placeholderChipTitle"
+    [color]="tag?.color ?? placeholderChipColor"
+  />
+}

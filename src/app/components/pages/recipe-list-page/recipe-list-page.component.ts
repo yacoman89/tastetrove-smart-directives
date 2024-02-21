@@ -1,19 +1,16 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { RecipesStateModule } from '../../../store/recipes/recipes.state.module';
-import { RecipesStateFacade } from '../../../store/recipes/recipes.state.facade';
-import { RecipePreview } from '../../../models/recipe.model';
-import { Observable, combineLatest, filter, map, switchMap } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../../common/card/card.component';
 import { RecipeListComponent } from '../../feature/recipe-list/recipe-list.component';
-import { ApiLoadError } from '../../../models/errors.model';
 import { RECIPES_LIST_LINK } from '../../../providers';
 import { Tag } from '../../../models/tag.model';
-import { ChipComponent } from '../../common/chip/chip.component';
-import { Color } from '../../../models/colors.model';
 import { Title } from '@angular/platform-browser';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RecipeListDirectiveModule } from '../../../directives/recipe-list/recipe-list.directive';
+import { TagFromRecipesDirective } from '../../../directives/tag-from-recipes/tag-from-recipes.directive';
+import { TagChipComponent } from '../../feature/tag-chip/tag-chip.component';
 
 @Component({
   selector: 'tt-recipe-list-page',
@@ -21,28 +18,27 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './recipe-list-page.component.scss',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, CardComponent, RecipeListComponent, RecipesStateModule, ChipComponent]
+  imports: [
+    CommonModule,
+    CardComponent,
+    RecipeListComponent,
+    RecipesStateModule,
+    TagChipComponent,
+    TagFromRecipesDirective,
+    RecipeListDirectiveModule
+  ]
 })
 export class RecipeListPageComponent {
-  recipeList$: Observable<RecipePreview[]>;
-  recipeListLoading$: Observable<boolean>;
-  recipeListError$: Observable<ApiLoadError | null>;
-  tag$: Observable<Tag>;
-  readonly placeholderChipTitle = '';
-  readonly placeholderChipColor = Color.AQUA_1;
+  tagLink$: Observable<string>;
 
-  constructor(@Inject(RECIPES_LIST_LINK) recipesLink: string, recipesStateFacade: RecipesStateFacade, route: ActivatedRoute, title: Title, destroyRef: DestroyRef) {
+  constructor(@Inject(RECIPES_LIST_LINK) public recipesLink: string, route: ActivatedRoute, private title: Title) {
     title.setTitle('TasteTrove | List');
-    const tagLink$ = route.params.pipe(map((params) => params?.['tagLink']));
-    this.recipeList$ = tagLink$.pipe(
-      switchMap((link) => recipesStateFacade.recipesByTag$(link))
-    );
-    this.recipeListLoading$ = recipesStateFacade.recipeListLoading$(recipesLink);
-    this.recipeListError$ = recipesStateFacade.recipeListError$(recipesLink);
-    this.tag$ = combineLatest([tagLink$, this.recipeList$]).pipe(
-      map(([tagLink, recipes]) => recipes[0].tags?.find((tag) => tag._links.tag.href === tagLink) ?? null),
-      filter((tag) => !!tag)
-    ) as Observable<Tag>;
-    this.tag$.pipe(takeUntilDestroyed(destroyRef)).subscribe((tag) => title.setTitle(`TasteTrove | List '${tag.title}'`));
+    this.tagLink$ = route.params.pipe(map((params) => params?.['tagLink']));
+  }
+
+  setTagInTitle(tag: Tag | null): void {
+    if (tag) {
+      this.title.setTitle(`TasteTrove | List '${tag.title}'`);
+    }
   }
 }

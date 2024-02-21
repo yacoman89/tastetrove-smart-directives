@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { RecipeListComponent } from '../../feature/recipe-list/recipe-list.component';
 import { RecipePreviewComponent } from '../../feature/recipe-preview/recipe-preview.component';
 import { CardComponent } from '../../common/card/card.component';
 import { CommonModule } from '@angular/common';
 import { Title } from '@angular/platform-browser';
-import { RecentRecipesDirectiveModule } from '../../../directives/recent-recipes/recent-recipes.directive';
+import { RecipeListDirectiveModule } from '../../../directives/recipe-list/recipe-list.directive';
 import { RecipeSpotlightDirectiveModule } from '../../../directives/recipe-spotlight/recipe-spotlight.directive';
+import { RECIPES_LIST_LINK } from '../../../providers';
 
 @Component({
   selector: 'tt-dashboard-page',
@@ -19,11 +20,11 @@ import { RecipeSpotlightDirectiveModule } from '../../../directives/recipe-spotl
     RecipeListComponent,
     CardComponent,
     RecipeSpotlightDirectiveModule,
-    RecentRecipesDirectiveModule
+    RecipeListDirectiveModule
   ]
 })
 export class DashboardPageComponent {
-  constructor(title: Title) {
+  constructor(title: Title, @Inject(RECIPES_LIST_LINK) public recipeListLink: string) {
     title.setTitle('TasteTrove | Dashboard');
   }
 }

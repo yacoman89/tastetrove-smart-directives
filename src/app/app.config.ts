@@ -10,7 +10,7 @@ import { IMAGE_CONFIG } from '@angular/common';
 import { CommentsLinkProvider, CreateReadyProvider, ErrorPageImageLinkProvider, RECIPES_LIST_LINK, RecipesLinkProvider, USER, UserLinkProvider, UserProvider, WindowProvider } from './providers';
 import { CommentsStateModule } from './store/comments/comments.state.module';
 import { CommentsStateFacade } from './store/comments/comments.state.facade';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
 import { RecipesStateFacade } from './store/recipes/recipes.state.facade';
 import { RecipesStateModule } from './store/recipes/recipes.state.module';
 
@@ -22,7 +22,10 @@ export function initializeApp(
 ): () => Observable<unknown> {
   return () => forkJoin([
     commentsStateFacade.fetchUser(username),
-    recipesStateFacade.fetchRecipeList(recipesLink)
+    (() => {
+      recipesStateFacade.fetchRecipeList(recipesLink);
+      return of();
+    })()
   ]);
 }
 
