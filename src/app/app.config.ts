@@ -7,13 +7,23 @@ import { routes } from './app.routes';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { IMAGE_CONFIG } from '@angular/common';
-import { CommentsLinkProvider, CreateReadyProvider, ErrorPageImageLinkProvider, RecipesLinkProvider, USER, UserLinkProvider, UserProvider, WindowProvider } from './providers';
+import { CommentsLinkProvider, CreateReadyProvider, ErrorPageImageLinkProvider, RECIPES_LIST_LINK, RecipesLinkProvider, USER, UserLinkProvider, UserProvider, WindowProvider } from './providers';
 import { CommentsStateModule } from './store/comments/comments.state.module';
 import { CommentsStateFacade } from './store/comments/comments.state.facade';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
+import { RecipesStateFacade } from './store/recipes/recipes.state.facade';
+import { RecipesStateModule } from './store/recipes/recipes.state.module';
 
-export function initializeApp(commentsStateFacade: CommentsStateFacade, username: string): () => Observable<unknown> {
-  return () => commentsStateFacade.fetchUser(username);
+export function initializeApp(
+  commentsStateFacade: CommentsStateFacade,
+  username: string,
+  recipesStateFacade: RecipesStateFacade,
+  recipesLink: string
+): () => Observable<unknown> {
+  return () => forkJoin([
+    commentsStateFacade.fetchUser(username),
+    recipesStateFacade.fetchRecipeList(recipesLink)
+  ]);
 }
 
 export const appConfig: ApplicationConfig = {
@@ -32,7 +42,8 @@ export const appConfig: ApplicationConfig = {
       ),
       NgxsReduxDevtoolsPluginModule.forRoot({ disabled: environment.production }),
       HttpClientModule,
-      CommentsStateModule
+      CommentsStateModule,
+      RecipesStateModule
     ),
     RecipesLinkProvider,
     WindowProvider,
@@ -48,7 +59,7 @@ export const appConfig: ApplicationConfig = {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
       multi: true,
-      deps: [CommentsStateFacade, USER],
+      deps: [CommentsStateFacade, USER, RecipesStateFacade, RECIPES_LIST_LINK],
     }
   ]
 };

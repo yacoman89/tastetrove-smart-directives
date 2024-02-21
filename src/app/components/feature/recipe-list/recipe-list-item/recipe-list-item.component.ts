@@ -21,7 +21,9 @@ import { Tag } from '../../../../models/tag.model';
 export class RecipeListItemComponent {
   @Input({ required: true }) recipe!: RecipePreview;
   @Input() excludeTags?: Tag[];
-  @HostBinding('class.w-full') get full(): boolean { return true; }
+  @HostBinding('class') get class(): string {
+    return 'w-full';
+  }
   readonly clockIcon = faClock;
   isHovering = false;
 }

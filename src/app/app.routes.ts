@@ -2,8 +2,6 @@ import { inject } from '@angular/core';
 import { Router, Routes } from '@angular/router';
 import { CREATE_READY } from './providers';
 
-
-
 export const routes: Routes = [
   {
     path: '',

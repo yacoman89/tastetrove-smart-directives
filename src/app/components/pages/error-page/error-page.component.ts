@@ -13,6 +13,7 @@ export class ErrorPageComponent {
   @HostBinding('class') get class(): string {
     return 'w-full pt-20 flex flex-col justify-center items-center'
   }
+
   constructor(@Inject(ERROR_PAGE_IMAGE_LINK) public errorPageImageLink: string, title: Title) {
     title.setTitle('TasteTrove | 404');
   }
