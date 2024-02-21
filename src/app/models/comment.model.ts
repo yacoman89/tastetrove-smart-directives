@@ -14,5 +14,5 @@ type CommentLinkRelations = SelfLinkRelation & LinkRelations<'recipe' | 'user'>;
 type BaseComment = DbComment & HateoasObject<CommentLinkRelations>;
 
 export interface Comment extends BaseComment {
-  user?: string;
+  name?: string;
 };

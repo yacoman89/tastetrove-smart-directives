@@ -32,8 +32,10 @@ class StateManager {
     const subState = this.ctx.getState().comments;
     const entityState = subState[this.link];
     this.ctx.patchState({
-      ...subState,
-      [this.link]: { ...entityState, ...patch },
+      comments: {
+        ...subState,
+        [this.link]: { ...entityState, ...patch }
+      }
     });
   }
 
@@ -45,12 +47,14 @@ class StateManager {
     const subState = this.ctx.getState().comments;
     const entityState = subState[this.link];
     this.ctx.patchState({
-      ...subState,
-      [this.link]: {
-        ...entityState,
-        addingComment: false,
-        comments: [comment, ...entityState.comments],
-      },
+      comments: {
+        ...subState,
+        [this.link]: {
+          ...entityState,
+          addingComment: false,
+          comments: [comment, ...entityState.comments],
+        }
+      }
     });
   }
 }

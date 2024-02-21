@@ -5,7 +5,7 @@ import { ApiLoadError } from '../../models/errors.model';
 import { FetchComments, FetchUser, PostComment } from './comments.state.actions';
 import { CommentsState } from './comments.state';
 import { Comment } from '../../models/comment.model';
-import { Recipe } from '../../models/recipe.model';
+import { Recipe, RecipePreview } from '../../models/recipe.model';
 import { User } from '../../models/user.model';
 
 @Injectable()
@@ -36,7 +36,7 @@ export class CommentsStateFacade {
     return this.store.dispatch(new FetchComments(link, options));
   }
 
-  postComment(recipe: Recipe, comment: string): Observable<unknown> {
+  postComment(recipe: Recipe | RecipePreview, comment: Comment): Observable<unknown> {
     return this.store.dispatch(new PostComment(recipe, comment));
   }
 }

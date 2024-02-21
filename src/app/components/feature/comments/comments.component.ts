@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NewCommentComponent } from './new-comment/new-comment.component';
 import { ApiLoadError } from '../../../models/errors.model';
@@ -18,8 +18,5 @@ export class CommentsComponent {
   @Input() comments?: Comment[];
   @Input() loading?: boolean;
   @Input() error?: ApiLoadError | null;
-
-  onComment(comment: Comment): void {
-    console.log('new comment:', comment);
-  }
+  @Output() comment = new EventEmitter<Comment>();
 }

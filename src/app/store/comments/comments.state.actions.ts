@@ -1,4 +1,5 @@
-import { Recipe } from "../../models/recipe.model";
+import { Recipe, RecipePreview } from '../../models/recipe.model';
+import { Comment } from '../../models/comment.model';
 
 const StatePrefix = '[Comments]';
 
@@ -14,5 +15,5 @@ export class FetchComments {
 
 export class PostComment {
   static readonly type = `${StatePrefix} Post Comment`;
-  constructor(public recipe: Recipe, public comment: string) {}
+  constructor(public recipe: Recipe | RecipePreview, public comment: Comment) {}
 }

@@ -25,7 +25,7 @@ import {
   UsersLinkTemplate,
 } from '../../models/user.model';
 import { COMMENTS_LINK, USER_LINK } from '../../providers';
-import { Recipe } from '../../models/recipe.model';
+import { Recipe, RecipePreview } from '../../models/recipe.model';
 
 @Injectable({ providedIn: 'root' })
 export class CommentService {
@@ -59,14 +59,14 @@ export class CommentService {
 
   postComment(
     user: User,
-    recipe: Recipe,
-    comment: string
+    recipe: Recipe | RecipePreview,
+    comment: Comment
   ): Observable<Comment> {
     const commentObj: Partial<DbComment> = {
       recipeId: recipe.id,
       userId: user.id,
-      date: new Date().toISOString(),
-      comment,
+      date: comment.date || new Date().toISOString(),
+      comment: comment.comment,
     };
     return this.http.post<DbComment>(this.commentsLink, commentObj).pipe(
       map((comment) => this.addLinkRelations([comment])[0]),
