@@ -4,7 +4,11 @@ export const createValueProvider = <T>(provide: InjectionToken<T>, value: unknow
 
 export const WINDOW = new InjectionToken<Window>('window');
 export const WindowProvider = createValueProvider(WINDOW, window);
-export const RECIPES_LIST_LINK = new InjectionToken<String>('recipes list link');
+export const RECIPES_LIST_LINK = new InjectionToken<string>('recipes list link');
 export const RecipesLinkProvider = createValueProvider(RECIPES_LIST_LINK, '/api/recipes');
+export const USER_LINK = new InjectionToken<string>('users link');
+export const UserLinkProvider = createValueProvider(USER_LINK, '/api/users?name={name}');
 export const USER = new InjectionToken<string>('current user');
-export const UserProvider = createValueProvider(USER, 'Gordon Ramsey');
+export const UserProvider = createValueProvider(USER, 'Gordon Ramsay');
+export const COMMENTS_LINK = new InjectionToken<string>('comments link');
+export const CommentsLinkProvider = createValueProvider(COMMENTS_LINK, '/api/recipeComments');

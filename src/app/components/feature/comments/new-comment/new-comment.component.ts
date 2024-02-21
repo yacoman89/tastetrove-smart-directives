@@ -20,7 +20,7 @@ export class NewCommentComponent implements OnInit {
   @Input({ required: true }) user!: string;
   @Output() comment = new EventEmitter<Comment>;
   formGroup = new FormGroup({
-    user: new FormControl<string | null>(this.user, Validators.required),
+    name: new FormControl<string | null>(this.user, Validators.required),
     date: new FormControl<string | null>('', Validators.required),
     comment: new FormControl<string | null>('', [Validators.required, Validators.maxLength(this.MAX_COMMENT_LENGTH), Validators.minLength(this.MIN_COMMENT_LENGTH)])
   })
@@ -36,7 +36,7 @@ export class NewCommentComponent implements OnInit {
   }
 
   private setUser(): void {
-    this.formGroup.controls.user.setValue(this.user);
+    this.formGroup.controls.name.setValue(this.user);
   }
 
   private setDate(): void {

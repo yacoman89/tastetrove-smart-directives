@@ -9,7 +9,7 @@
       <span class="self-end h-9 w-14 mt-1 rounded bg-gray-200"></span>
     </div>
   } @else if ((comments?.length || 0) > 0) {
-    <tt-new-comment [user]="user" (comment)="onComment($event)"></tt-new-comment>
+    <tt-new-comment [user]="user" (comment)="comment.emit($event)"></tt-new-comment>
     <ul role="list" class="space-y-3 text-gray-600">
       @for (comment of comments; track $index) {
         <hr />
@@ -19,6 +19,6 @@
       }
     </ul>
   } @else {
-    <tt-new-comment [user]="user" (comment)="onComment($event)"></tt-new-comment>
+    <tt-new-comment [user]="user" (comment)="comment.emit($event)"></tt-new-comment>
   }
 </span>

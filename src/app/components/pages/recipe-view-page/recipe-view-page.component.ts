@@ -11,9 +11,8 @@ import { Instruction } from '../../../models/instruction.model';
 import { Comment } from '../../../models/comment.model';
 import { RecipesStateFacade } from '../../../store/recipes/recipes.state.facade';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map, shareReplay, switchMap } from 'rxjs';
+import { Observable, filter, map, shareReplay, switchMap } from 'rxjs';
 import { ApiLoadError } from '../../../models/errors.model';
-import { USER } from '../../../providers';
 import { IngredientsStateFacade } from '../../../store/ingredients/ingredients.state.facade';
 import { RecipesStateModule } from '../../../store/recipes/recipes.state.module';
 import { IngredientsStateModule } from '../../../store/ingredients/ingredients.state.module';
@@ -22,6 +21,7 @@ import { CommentsStateModule } from '../../../store/comments/comments.state.modu
 import { InstructionsStateFacade } from '../../../store/instructions/instructions.state.facade';
 import { CommentsStateFacade } from '../../../store/comments/comments.state.facade';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'tt-recipe-view-page',
@@ -59,14 +59,16 @@ export class RecipeViewPageComponent {
   commentsLoading$: Observable<boolean>;
   commentsError$: Observable<ApiLoadError | null>;
 
+  user$: Observable<User>;
+  private currentRecipe!: Recipe | RecipePreview;
+
   constructor(
-    @Inject(USER) public user: string,
     route: ActivatedRoute,
     destroyRef: DestroyRef,
     recipesStateFacade: RecipesStateFacade,
     ingredientsStateFacade: IngredientsStateFacade,
     instructionsStateFacade: InstructionsStateFacade,
-    commentsStateFacade: CommentsStateFacade
+    private commentsStateFacade: CommentsStateFacade
   ) {
     const recipeLink$ = route.params.pipe(map((params) => params?.['recipeLink']));
     this.recipe$ = recipeLink$.pipe(switchMap((link) => recipesStateFacade.recipe$(link)), shareReplay(1));
@@ -88,11 +90,18 @@ export class RecipeViewPageComponent {
     this.commentsLoading$ = commentsLink$.pipe(switchMap((link) => commentsStateFacade.loading$(link)));
     this.commentsError$ = commentsLink$.pipe(switchMap((link) => commentsStateFacade.error$(link)));
 
-    this.recipe$.pipe(takeUntilDestroyed(destroyRef)).subscribe((recipe) => {
+    this.user$ = commentsStateFacade.user$;
+
+    this.recipe$.pipe(takeUntilDestroyed(destroyRef), filter((recipe) => !!recipe)).subscribe((recipe) => {
+      this.currentRecipe = recipe;
       const links = recipe._links;
       ingredientsStateFacade.fetchIngredients(links.ingredients.href);
       instructionsStateFacade.fetchInstructions(links.instructions.href);
       commentsStateFacade.fetchComments(links.comments.href);
     });
+  }
+
+  onComment(comment: Comment): void {
+    this.commentsStateFacade.postComment(this.currentRecipe, comment);
   }
 }

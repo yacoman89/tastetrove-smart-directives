@@ -2,13 +2,19 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ApiLoadError } from '../../models/errors.model';
-import { FetchComments } from './comments.state.actions';
+import { FetchComments, FetchUser, PostComment } from './comments.state.actions';
 import { CommentsState } from './comments.state';
 import { Comment } from '../../models/comment.model';
+import { Recipe, RecipePreview } from '../../models/recipe.model';
+import { User } from '../../models/user.model';
 
 @Injectable()
 export class CommentsStateFacade {
-  constructor(private store: Store) {}
+  user$: Observable<User>;
+
+  constructor(private store: Store) {
+    this.user$ = this.store.select(CommentsState.user);
+  }
 
   comments$(fetchLink: string): Observable<Comment[]> {
     return this.store.select(CommentsState.comments(fetchLink));
@@ -22,7 +28,15 @@ export class CommentsStateFacade {
     return this.store.select(CommentsState.error(fetchLink));
   }
 
+  fetchUser(username: string): Observable<unknown> {
+    return this.store.dispatch(new FetchUser(username));
+  }
+
   fetchComments(link: string, options?: { force: boolean }): Observable<unknown> {
     return this.store.dispatch(new FetchComments(link, options));
+  }
+
+  postComment(recipe: Recipe | RecipePreview, comment: Comment): Observable<unknown> {
+    return this.store.dispatch(new PostComment(recipe, comment));
   }
 }
