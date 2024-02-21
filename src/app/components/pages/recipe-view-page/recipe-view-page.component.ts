@@ -102,7 +102,6 @@ export class RecipeViewPageComponent {
   }
 
   onComment(comment: Comment): void {
-    console.log('comment:', comment);
     this.commentsStateFacade.postComment(this.currentRecipe, comment);
   }
 }

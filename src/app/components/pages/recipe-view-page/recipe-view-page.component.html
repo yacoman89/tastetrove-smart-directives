@@ -30,7 +30,7 @@
     <h2 class="mb-3 text-xl font-semibold">Comments</h2>
     <tt-card>
       <tt-comments
-        [user]="(user$ | async)?.name || ''"
+        [user]="(user$ | async)?.name || 'Unknown User'"
         [comments]="(comments$ | async) ?? undefined"
         [loading]="(commentsLoading$ | async)!"
         (comment)="onComment($event)"
