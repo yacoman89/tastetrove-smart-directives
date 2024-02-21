@@ -1,4 +1,3 @@
-import { RatingComponent } from '../components/common/rating/rating.component';
 import { HateoasObject, LinkRelations, SelfLinkRelation } from './hateoas.model';
 import { Ingredient } from './ingredient.model';
 import { Instruction } from './instruction.model';

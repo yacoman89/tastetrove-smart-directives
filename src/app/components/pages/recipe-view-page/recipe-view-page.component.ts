@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef } from '@angular/core';
 import { RecipeHeaderComponent } from '../../feature/recipe-header/recipe-header.component';
 import { RecipeInstructionsComponent } from '../../feature/recipe-instructions/recipe-instructions.component';
 import { RecipeIngredientsComponent } from '../../feature/recipe-ingredients/recipe-ingredients.component';

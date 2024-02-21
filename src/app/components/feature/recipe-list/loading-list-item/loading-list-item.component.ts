@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 import { LoadingRatingComponent } from '../../../common/loading-rating/loading-rating.component';
 
 @Component({
@@ -10,5 +10,7 @@ import { LoadingRatingComponent } from '../../../common/loading-rating/loading-r
   imports: [LoadingRatingComponent]
 })
 export class LoadingListItemComponent {
-  @HostBinding('class.w-full') get full(): boolean { return true; }
+  @HostBinding('class') get class(): string {
+    return 'w-full';
+  }
 }
