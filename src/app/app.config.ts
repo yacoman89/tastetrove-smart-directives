@@ -7,7 +7,7 @@ import { routes } from './app.routes';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { IMAGE_CONFIG } from '@angular/common';
-import { CommentsLinkProvider, RecipesLinkProvider, USER, UserLinkProvider, UserProvider, WindowProvider } from './providers';
+import { CommentsLinkProvider, CreateReadyProvider, ErrorPageImageLinkProvider, RecipesLinkProvider, USER, UserLinkProvider, UserProvider, WindowProvider } from './providers';
 import { CommentsStateModule } from './store/comments/comments.state.module';
 import { CommentsStateFacade } from './store/comments/comments.state.facade';
 import { Observable } from 'rxjs';
@@ -39,6 +39,8 @@ export const appConfig: ApplicationConfig = {
     UserLinkProvider,
     UserProvider,
     CommentsLinkProvider,
+    ErrorPageImageLinkProvider,
+    CreateReadyProvider,
     {
       provide: IMAGE_CONFIG, useValue: { disableImageSizeWarning: true }
     },

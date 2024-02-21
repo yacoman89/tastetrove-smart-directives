@@ -1,28 +1,28 @@
 <span class="w-full h-fit flex flex-col p-5 gap-10">
   @if (loading || error) {
-    <div role="status" class="space-y-4 animate-pulse">
+    <div role="status" class="space-y-3 animate-pulse">
       <span class="flex gap-3 items-center">
-        <span class="h-4 w-4 rounded bg-gray-200"></span>
+        <span class="size-5 rounded bg-gray-200"></span>
         <span class="h-4 w-80 bg-gray-200"></span>
       </span>
       <span class="flex gap-3 items-center">
-        <span class="h-4 w-4 rounded bg-gray-200"></span>
+        <span class="size-5 rounded bg-gray-200"></span>
         <span class="h-4 w-96 bg-gray-200"></span>
       </span>
       <span class="flex gap-3 items-center">
-        <span class="h-4 w-4 rounded bg-gray-200"></span>
+        <span class="size-5 rounded bg-gray-200"></span>
         <span class="h-4 w-64 bg-gray-200"></span>
       </span>
       <span class="flex gap-3 items-center">
-        <span class="h-4 w-4 rounded bg-gray-200"></span>
+        <span class="size-5 rounded bg-gray-200"></span>
         <span class="h-4 w-72 bg-gray-200"></span>
       </span>
     </div>
   } @else if (ingredients) {
     <ul role="list" class="space-y-3 text-gray-600">
       @for (ingredient of ingredients; track $index) {
-        <li class="flex gap-3 items-center">
-          <input id="ingredient" name="ingredient" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+        <li class="flex gap-3 items-start">
+          <input id="ingredient" name="ingredient" type="checkbox" class="size-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
           <label for="ingredient" class="text-sm text-gray-900">{{ ingredient.name }} ({{ ingredient.quantity }})</label>
         </li>
       }
