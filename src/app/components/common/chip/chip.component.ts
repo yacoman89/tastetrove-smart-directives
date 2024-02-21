@@ -12,8 +12,8 @@ import { Color, ColorMatcher } from '../../../models/colors.model';
   imports: [CommonModule, RouterModule]
 })
 export class ChipComponent {
-  @Input({ required: true }) title!: string;
-  @Input({ required: true }) set color(color: Color) {
+  @Input() title!: string;
+  @Input() set color(color: Color) {
     this.colors.color = color;
   }
   get color(): Color {

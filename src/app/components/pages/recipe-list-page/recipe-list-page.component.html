@@ -1,21 +1,29 @@
 <div class="w-full h-fit p-5 flex flex-col">
   <span class="flex flex-row gap-5 align-middle mb-3">
     <h2 class="text-xl font-semibold">Recipes Tagged With:</h2>
-    @if (tag$ | async) {
-      <tt-chip
-        class="h-fit"
-        [title]="(tag$ | async)?.title ?? placeholderChipTitle"
-        [color]="(tag$ | async)?.color ?? placeholderChipColor"
-      />
-    } @else {
-      Loading...
-    }
+    <tt-tag-chip
+      class="h-fit"
+      #tagChip
+      ttRecipeList
+      ttTagFromRecipes
+      #tagFromRecipesDir="ttTagFromRecipesDir"
+      [recipesLink]="recipesLink"
+      [tagLink]="(tagLink$ | async) ?? undefined"
+      (recipeList)="tagFromRecipesDir.recipes = $event"
+      (recipeListLoading)="tagChip.loading = $event"
+      (recipeListError)="tagChip.error = $event"
+      (tag)="tagChip.tag = ($event ?? undefined); setTagInTitle($event)"
+    />
   </span>
   <tt-card>
     <tt-recipe-list
-      [recipes]="(recipeList$ | async) ?? []"
-      [loading]="(recipeListLoading$ | async) ?? true"
-      [error]="recipeListError$ | async"
+      #recipeListComponent
+      ttRecipeList
+      [recipesLink]="recipesLink"
+      [tagLink]="(tagLink$ | async) ?? undefined"
+      (recipeList)="recipeListComponent.recipes = $event"
+      (recipeListLoading)="recipeListComponent.loading = $event"
+      (recipeListError)="recipeListComponent.error = $event"
       [ghostLoadingRowCount]="3"
     ></tt-recipe-list>
   </tt-card>
