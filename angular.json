@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "frontrunners24": {
+    "tastetrove": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -19,7 +19,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/frontrunners24",
+            "outputPath": "dist/tastetrove",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -71,10 +71,10 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "frontrunners24:build:production"
+              "buildTarget": "tastetrove:build:production"
             },
             "development": {
-              "buildTarget": "frontrunners24:build:development"
+              "buildTarget": "tastetrove:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "frontrunners24:build"
+            "buildTarget": "tastetrove:build"
           }
         },
         "test": {
