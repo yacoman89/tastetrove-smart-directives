@@ -5,8 +5,11 @@
     <h2 class="mb-3 text-xl font-semibold">Recipe Spotlight</h2>
     <tt-card>
       <tt-recipe-preview
-        [loading]="(recipeListLoading$ | async) ?? true"
-        [recipe]="(recipeSpotlight$ | async) ?? placeholderRecipe"
+        #recipeSpotlight
+        ttRecipeSpotlight
+        (recipeSpotlight)="recipeSpotlight.recipe = $event"
+        (recipesLoading)="recipeSpotlight.loading = $event"
+        (recipesError)="recipeSpotlight.error = $event"
       ></tt-recipe-preview>
     </tt-card>
   </div>
@@ -15,10 +18,12 @@
     <h2 class="mb-3 text-xl font-semibold">Recently Added Recipes</h2>
     <tt-card>
       <tt-recipe-list
-        [recipes]="(recipeList$ | async) ?? []"
-        [loading]="(recipeListLoading$ | async) ?? true"
-        [error]="recipeListError$ | async"
+        #recipesList
+        ttRecentRecipes
         [ghostLoadingRowCount]="5"
+        (recipesList)="recipesList.recipes = $event"
+        (recipesListLoading)="recipesList.loading = $event"
+        (recipesListError)="recipesList.error = $event"
       ></tt-recipe-list>
     </tt-card>
   </div>
