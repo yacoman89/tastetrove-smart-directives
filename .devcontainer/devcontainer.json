@@ -5,5 +5,17 @@
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/eitsupi/devcontainer-features/jq-likes:2": {},
     "ghcr.io/guiyomh/features/vim:0": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "PKief.material-icon-theme",
+        "streetsidesoftware.code-spell-checker",
+        "bradlc.vscode-tailwindcss",
+        "Angular.ng-template",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode"
+      ]
+    }
   }
 }
